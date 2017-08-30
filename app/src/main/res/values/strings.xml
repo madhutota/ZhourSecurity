@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">ZhourSecurity</string>
+    <string name="txt_cd" />
+
+
+    <!-- Dialog message -->
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="alert_dialog_setting">Settings</string>
+    <string name="please_wait">Please wait &#8230;</string>
+    <string name="no_internet_msg">This feature requires internet connection. Please check your internet settings and try again.</string>
+    <string name="no_internet_msg_main">This Application required internet connection. Please check your internet setting and try again.</string>
+    <string name="no_internet_title">No internet</string>
+    <string name="unauthorized_access">Unauthorized access</string>
+    <string name="select_contact">Select Contact</string>
+    <string name="search">Search</string>
+    <string name="invite_type">Invite Type</string>
+    <string name="venue">Venue</string>
+    <string name="phone_numbers">Phone numbers</string>
+    <string name="txt_under_dev">Under Development</string>
+    <string name="txt_hint_username">Username</string>
+    <string name="notification_error_ssl_cert_invalid">You are accessing a page with an
+        untrusted or invalid certificate. Do you want to continue?</string>
+
+
 </resources>
