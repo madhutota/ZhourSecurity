@@ -11,7 +11,5 @@ public class StaffDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_detail);
-
-        /*Guest Name, phone number, host name and flat number*/
     }
 }

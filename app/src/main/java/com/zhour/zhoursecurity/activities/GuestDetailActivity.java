@@ -13,10 +13,9 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -32,31 +31,47 @@ import com.zhour.zhoursecurity.Utils.Utility;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class GuestDetailActivity extends BaseActivity {
 
-    private EditText et_car_number;
+    @BindView(R.id.et_car_number)
+    EditText et_car_number;
 
-    private Button btn_submit;
+    @BindView(R.id.btn_submit)
+    Button btn_submit;
 
-    private LinearLayout ll_details;
+    @BindView(R.id.ll_details)
+    LinearLayout ll_details;
 
+    @BindView(R.id.tv_guest)
+    TextView tv_guest;
 
-    private TextView tv_guest;
+    @BindView(R.id.et_guest_name)
+    EditText et_guest_name;
 
-    private EditText et_guest_name;
+    @BindView(R.id.tv_phone)
+    TextView tv_phone;
 
-    private TextView tv_phone;
-    private EditText et_phone;
+    @BindView(R.id.et_phone)
+    EditText et_phone;
 
-    private TextView tv_host;
+    @BindView(R.id.tv_host)
+    TextView tv_host;
 
-    private EditText et_host_name;
+    @BindView(R.id.et_host_name)
+    EditText et_host_name;
 
-    private TextView tv_flat_no;
+    @BindView(R.id.tv_flat_no)
+    TextView tv_flat_no;
 
-    private EditText et_flat_no;
+    @BindView(R.id.et_flat_no)
+    EditText et_flat_no;
 
-    private Button btn_scan_vehicle;
+    @BindView(R.id.btn_scan_vehicle)
+    Button btn_scan_vehicle;
 
 
     private static final int REQUEST_WRITE_PERMISSION = 20;
@@ -67,13 +82,16 @@ public class GuestDetailActivity extends BaseActivity {
     private static final int PHOTO_REQUEST = 10;
     private TextRecognizer detector;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_detail);
-       /* ButterKnife.bind(this);*/
-        inItUi();
+        ButterKnife.bind(this);
+        typeFace();
         if (savedInstanceState != null) {
             imageUri = Uri.parse(savedInstanceState.getString(SAVED_INSTANCE_URI));
             // tvScanText.setText(savedInstanceState.getString(SAVED_INSTANCE_RESULT));
@@ -81,66 +99,37 @@ public class GuestDetailActivity extends BaseActivity {
         detector = new TextRecognizer.Builder(getApplicationContext()).build();
     }
 
-    private void inItUi() {
+    @OnClick(R.id.btn_submit)
+    void submitCarDetails() {
+        Utility.hideSoftKeyboard(GuestDetailActivity.this, btn_submit);
+        if (isValidCardNumber()) {
+            et_car_number.setText("");
+            ll_details.setVisibility(View.VISIBLE);
 
-        et_car_number = (EditText) findViewById(R.id.et_car_number);
-        btn_submit = (Button) findViewById(R.id.btn_submit);
-        /*SUBMIT CAR NUMBER*/
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utility.hideSoftKeyboard(GuestDetailActivity.this, btn_submit);
-                if (isValidCardNumber()) {
-                    et_car_number.setText("");
+        }
+    }
 
-                    ll_details.setVisibility(View.VISIBLE);
+    @OnClick(R.id.btn_scan_vehicle)
+    void scanVehicle() {
+        ActivityCompat.requestPermissions(GuestDetailActivity.this, new
+                String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, REQUEST_WRITE_PERMISSION);
+    }
 
-
-                    // ll_details.setVisibility(View.VISIBLE);
-
-
-                }
-
-            }
-        });
-
-        /*SCAN VEHICLE */
-
-        btn_scan_vehicle = (Button) findViewById(R.id.btn_scan_vehicle);
-        btn_scan_vehicle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityCompat.requestPermissions(GuestDetailActivity.this, new
-                        String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, REQUEST_WRITE_PERMISSION);
-
-            }
-        });
-
-
-        ll_details = (LinearLayout) findViewById(R.id.ll_details);
-
+    private void typeFace() {
         /*GUSET NAME */
-        tv_guest = (TextView) findViewById(R.id.tv_guest);
         tv_guest.setTypeface(Utility.getFontAwesomeWebFont(this));
-        et_guest_name = (EditText) findViewById(R.id.et_guest_name);
         et_guest_name.setTypeface(Utility.getFontAwesomeWebFont(this));
 
         /*PHONE NUMBER*/
-        tv_phone = (TextView) findViewById(R.id.tv_phone);
         tv_phone.setTypeface(Utility.getFontAwesomeWebFont(this));
-        et_phone = (EditText) findViewById(R.id.et_phone);
         et_phone.setTypeface(Utility.getFontAwesomeWebFont(this));
 
        /* HOST NAME */
-        tv_host = (TextView) findViewById(R.id.tv_host);
         tv_host.setTypeface(Utility.getFontAwesomeWebFont(this));
-        et_host_name = (EditText) findViewById(R.id.et_host_name);
         et_host_name.setTypeface(Utility.getFontAwesomeWebFont(this));
 
         /*FLAT NO*/
-        tv_flat_no = (TextView) findViewById(R.id.tv_flat_no);
         tv_flat_no.setTypeface(Utility.getFontAwesomeWebFont(this));
-        et_flat_no = (EditText) findViewById(R.id.et_flat_no);
         et_flat_no.setTypeface(Utility.getFontAwesomeWebFont(this));
 
 
@@ -251,9 +240,4 @@ public class GuestDetailActivity extends BaseActivity {
         }
     }
 
-   /* @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransitionExit();
-    }*/
 }

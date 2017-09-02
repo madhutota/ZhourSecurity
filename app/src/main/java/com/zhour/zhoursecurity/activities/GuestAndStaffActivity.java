@@ -2,52 +2,62 @@ package com.zhour.zhoursecurity.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhour.zhoursecurity.R;
 import com.zhour.zhoursecurity.Utils.Utility;
 
-public class GuestAndStaffActivity extends BaseActivity implements View.OnClickListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-    private LinearLayout ll_staff;
-    private LinearLayout ll_guest;
+public class GuestAndStaffActivity extends BaseActivity {
 
-    private TextView tv_guest;
-    private TextView tv_staff;
+
+    @BindView(R.id.ll_staff)
+    LinearLayout ll_staff;
+
+
+    @BindView(R.id.ll_guest)
+    LinearLayout ll_guest;
+
+    @BindView(R.id.tv_guest)
+    TextView tv_guest;
+
+    @BindView(R.id.tv_staff)
+    TextView tv_staff;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_and_staff);
+        ButterKnife.bind(this);
+        setTypeface();
 
-        ll_staff = (LinearLayout) findViewById(R.id.ll_staff);
+    }
 
-        ll_staff.setOnClickListener(this);
-        ll_guest = (LinearLayout) findViewById(R.id.ll_guest);
-        ll_guest.setOnClickListener(this);
-
-        tv_guest = (TextView) findViewById(R.id.tv_guest);
+    private void setTypeface() {
         tv_guest.setTypeface(Utility.getFontAwesomeWebFont(this));
-        tv_staff = (TextView) findViewById(R.id.tv_staff);
         tv_staff.setTypeface(Utility.getFontAwesomeWebFont(this));
 
+    }
+
+    @OnClick(R.id.ll_staff)
+    void getStaff() {
 
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_staff:
-                break;
-            case R.id.ll_guest:
-                Intent intent = new Intent(getApplicationContext(), GuestDetailActivity.class);
-                startActivity(intent);
-                break;
-        }
-
+    @OnClick(R.id.ll_guest)
+    void getGuest() {
+        Intent intent = new Intent(getApplicationContext(), GuestDetailActivity.class);
+        startActivity(intent);
 
     }
+
+
 }

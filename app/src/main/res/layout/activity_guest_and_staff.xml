@@ -3,22 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_splash"
+    android:orientation="vertical"
     tools:context="com.zhour.zhoursecurity.activities.GuestAndStaffActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/toolbr_bg"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/logo" />
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
         android:weightSum="1">
 
         <LinearLayout
             android:id="@+id/ll_guest"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_0dp"
-            android:layout_margin="@dimen/_10dp"
-            android:layout_marginBottom="@dimen/_15dp"
-            android:layout_marginTop="@dimen/_15dp"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_10dp"
             android:layout_weight="0.7"
             android:background="@drawable/rectangel_drawble">
 
@@ -38,8 +54,8 @@
         <LinearLayout
             android:id="@+id/ll_staff"
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/_10dp"
             android:layout_height="@dimen/_0dp"
+            android:layout_margin="@dimen/_10dp"
             android:layout_marginBottom="@dimen/_15dp"
             android:layout_weight="0.3"
             android:background="@drawable/rectangel_drawble">

@@ -2,6 +2,7 @@ package com.zhour.zhoursecurity.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.zhour.zhoursecurity.R;
@@ -19,6 +20,8 @@ public class DashboardActivity extends BaseActivity {
     TextView tv_out;
     @BindView(R.id.tv_emergency)
     TextView tv_emergency;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
