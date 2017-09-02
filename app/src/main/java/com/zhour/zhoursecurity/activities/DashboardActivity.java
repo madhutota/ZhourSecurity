@@ -2,60 +2,53 @@ package com.zhour.zhoursecurity.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zhour.zhoursecurity.R;
 import com.zhour.zhoursecurity.Utils.Utility;
 
-public class DashboardActivity extends BaseActivity implements View.OnClickListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-    private RelativeLayout rl_in;
-    private RelativeLayout rl_out;
+public class DashboardActivity extends BaseActivity {
 
-    private TextView tv_in;
-    private TextView tv_out;
-
+    @BindView(R.id.tv_in)
+    TextView tv_in;
+    @BindView(R.id.tv_out)
+    TextView tv_out;
+    @BindView(R.id.tv_emergency)
+    TextView tv_emergency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
-        inItUi();
+        ButterKnife.bind(this);
+        initUi();
     }
 
-    private void inItUi() {
-
-        rl_in = (RelativeLayout) findViewById(R.id.rl_in);
-        rl_in.setOnClickListener(this);
-        rl_out = (RelativeLayout) findViewById(R.id.rl_out);
-        rl_out.setOnClickListener(this);
-        tv_in = (TextView) findViewById(R.id.tv_in);
-        tv_in.setTypeface(Utility.getFontAwesomeWebFont(this));
-        tv_out = (TextView) findViewById(R.id.tv_out);
-        tv_out.setTypeface(Utility.getFontAwesomeWebFont(this));
+    private void initUi() {
+        tv_in.setTypeface(Utility.setRobotoRegular(this));
+        tv_out.setTypeface(Utility.setRobotoRegular(this));
+        tv_emergency.setTypeface(Utility.setRobotoRegular(this));
     }
 
-    @Override
-    public void onClick(View view) {
+    @OnClick(R.id.tv_in)
+    void navigateIn() {
+        Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
+        startActivity(intent);
+    }
 
-        switch (view.getId()) {
-            case R.id.rl_in:
-                Animation animation = AnimationUtils.loadAnimation(this,R.anim.slide_left2right);
-                Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
-                startActivity(intent);
-              //  Toast.makeText(this, "In", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.rl_out:
-                Toast.makeText(this, "Out", Toast.LENGTH_SHORT).show();
-                break;
-        }
+    @OnClick(R.id.tv_out)
+    void navigateOut() {
+        Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
+        startActivity(intent);
+    }
 
-
+    @OnClick(R.id.tv_emergency)
+    void navigateEmergency() {
+        Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
+        startActivity(intent);
     }
 }

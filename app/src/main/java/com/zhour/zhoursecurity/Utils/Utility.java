@@ -68,6 +68,7 @@ public class Utility {
         else
             return context.getResources().getColor(id);
     }
+
     /**
      * HIDE THE KEYBOARD FOR FRAGMENT
      **/
@@ -163,6 +164,7 @@ public class Utility {
             return false;
         }
     }
+
     /**
      * MATERIAL ICONS REGULAR TYPEFACE
      * This method is used to set the icons in Material Icons Regular
@@ -270,6 +272,10 @@ public class Utility {
         }
     }
 
+    /*Get Font Awesome Web font Type face*/
+    public static Typeface setRobotoRegular(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
+    }
 
 
 }

@@ -93,14 +93,10 @@ public class GuestDetailActivity extends BaseActivity {
                 if (isValidCardNumber()) {
                     et_car_number.setText("");
 
-                    Animation slide = AnimationUtils.loadAnimation(GuestDetailActivity.this, R.anim.slide);
-
-                    ll_details.startAnimation(slide);
                     ll_details.setVisibility(View.VISIBLE);
 
 
-
-                   // ll_details.setVisibility(View.VISIBLE);
+                    // ll_details.setVisibility(View.VISIBLE);
 
 
                 }

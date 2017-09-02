@@ -32,6 +32,7 @@
     <string name="flat_number">Flat Number</string>
     <string name="scan_vehicle">Scan Vehicle</string>
     <string name="enter_vehicle_number">Enter Vehicle Number</string>
+    <string name="emergency">Emergency</string>
 
 
 </resources>
