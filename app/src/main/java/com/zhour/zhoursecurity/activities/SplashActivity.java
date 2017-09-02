@@ -20,18 +20,25 @@ public class SplashActivity extends AppCompatActivity {
         Runnable action = new Runnable() {
             @Override
             public void run() {
+                navigateToDashBoard();
 
-                if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(SplashActivity.this, Constants.TOKEN))) {
-                    Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
-                    startActivity(intent);
-                    finish();
+               /* if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(SplashActivity.this, Constants.TOKEN))) {
+                    navigateToDashBoard();
+
                 } else {
-                    /*navigateToSignIn();*/
-                }
+                    *//*navigateToSignIn();*//*
+                }*/
             }
         };
         mSplashHandler.postDelayed(action, Constants.SPLASH_TIME_OUT);
 
 
+    }
+    /*This method is used to navigate sign in*/
+    public void navigateToDashBoard() {
+        Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }

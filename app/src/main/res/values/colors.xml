@@ -6,4 +6,14 @@
 
 
     <color name="transparent">@android:color/transparent</color>
+    <color name="pink">#E91E63</color>
+    <color name="black">@android:color/black</color>
+    <color name="white">@android:color/white</color>
+    <color name="red">@android:color/holo_red_dark</color>
+    <color name="blue">#0097A7</color>
+    <color name="green">#388E3C</color>
+
+    <color name="success_alert">#699864</color>
+
+    <color name="error_alert">#FB5151</color>
 </resources>

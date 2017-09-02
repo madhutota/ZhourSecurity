@@ -6,10 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -159,6 +162,46 @@ public class Utility {
             e.printStackTrace();
             return false;
         }
+    }
+    /**
+     * MATERIAL ICONS REGULAR TYPEFACE
+     * This method is used to set the icons in Material Icons Regular
+     **/
+    public static Typeface getMaterialIconsRegular(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "fonts/matireal_icons_regular.ttf");
+    }
+
+    /**
+     * FONT AWESOME WEB FONT TYPEFACE
+     * This method is used to set the icons in font awesome
+     **/
+    public static Typeface getFontAwesomeWebFont(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "fonts/fontawesome-webfont.ttf");
+    }
+
+
+    public static void setSnackBar(AppCompatActivity parent, View mView, String message) {
+        SnackBar snackBar = new SnackBar();
+        snackBar.view(mView)
+                .customActionFont(getFontAwesomeWebFont(parent))
+                .customTitleFont(getFontAwesomeWebFont(parent))
+                .text(message, "OK", 2)
+                .textColors(Color.WHITE, getColor(parent, R.color.black))
+                .backgroundColor(getColor(parent, R.color.error_alert))
+                .duration(SnackBar.SnackBarDuration.LONG)
+                .show();
+    }
+
+    public static void setSuccessSnackBar(AppCompatActivity parent, View mView, String message) {
+        SnackBar snackBar = new SnackBar();
+        snackBar.view(mView)
+                .customActionFont(getFontAwesomeWebFont(parent))
+                .customTitleFont(getFontAwesomeWebFont(parent))
+                .text(message, "OK", 2)
+                .textColors(Color.WHITE, getColor(parent, R.color.white))
+                .backgroundColor(getColor(parent, R.color.success_alert))
+                .duration(SnackBar.SnackBarDuration.LONG)
+                .show();
     }
 
     public static android.app.AlertDialog showSettingDialog(final Context context,

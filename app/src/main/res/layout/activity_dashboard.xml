@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zhour.zhoursecurity.activities.DashboardActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_in"
+            android:layout_width="@dimen/_0dp"
+            android:layout_marginTop="@dimen/_5dp"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:layout_marginLeft="@dimen/_5dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/rectangel_drawble"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/in"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_28sp"  />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_out"
+            android:layout_width="@dimen/_0dp"
+            android:layout_marginTop="@dimen/_5dp"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:layout_marginLeft="@dimen/_5dp"
+            android:layout_marginRight="2.5dp"
+            android:background="@drawable/rectangel_drawble"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/out"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_28sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
