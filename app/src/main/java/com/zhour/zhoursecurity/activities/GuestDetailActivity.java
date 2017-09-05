@@ -94,7 +94,7 @@ public class GuestDetailActivity extends BaseActivity {
         typeFace();
         if (savedInstanceState != null) {
             imageUri = Uri.parse(savedInstanceState.getString(SAVED_INSTANCE_URI));
-            // tvScanText.setText(savedInstanceState.getString(SAVED_INSTANCE_RESULT));
+            et_car_number.setText(savedInstanceState.getString(SAVED_INSTANCE_RESULT));
         }
         detector = new TextRecognizer.Builder(getApplicationContext()).build();
     }
@@ -102,11 +102,36 @@ public class GuestDetailActivity extends BaseActivity {
     @OnClick(R.id.btn_submit)
     void submitCarDetails() {
         Utility.hideSoftKeyboard(GuestDetailActivity.this, btn_submit);
-        if (isValidCardNumber()) {
+
+        if (isValidFields() && isValidDigitFields()) {
             et_car_number.setText("");
             ll_details.setVisibility(View.VISIBLE);
-
         }
+    }
+
+    /*VALIDATIONS */
+
+    private boolean isValidFields() {
+        boolean isValidated = false;
+        if (Utility.isValueNullOrEmpty(et_car_number.getText().toString().trim())) {
+            Utility.setSnackBar(this, et_car_number, "Please enter vehicle number");
+            et_car_number.requestFocus();
+        } else {
+            isValidated = true;
+        }
+        return isValidated;
+    }
+
+    private boolean isValidDigitFields() {
+        boolean isValid = true;
+        if (Utility.isValueNullOrEmpty(et_car_number.getText().toString())) {
+            Utility.setSnackBar(this, et_car_number, "Please write code");
+            isValid = false;
+        } else if (et_car_number.getText().toString().length() < 4) {
+            Utility.setSnackBar(this, et_car_number, "Code must be 4 digit");
+            isValid = false;
+        }
+        return isValid;
     }
 
     @OnClick(R.id.btn_scan_vehicle)
@@ -157,22 +182,6 @@ public class GuestDetailActivity extends BaseActivity {
         startActivityForResult(intent, PHOTO_REQUEST);
     }
 
-
-    /*VALIDATIONS  */
-    private boolean isValidCardNumber() {
-
-        boolean isValid = true;
-        if (Utility.isValueNullOrEmpty(et_car_number.getText().toString())) {
-            Utility.setSnackBar(this, et_car_number, "Please write code");
-            isValid = false;
-        } else if (et_car_number.getText().toString().length() != 4) {
-            Utility.setSnackBar(this, et_car_number, "Code must be 4 digit");
-            isValid = false;
-        }
-        return isValid;
-
-    }
-
     private void launchMediaScanIntent() {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         mediaScanIntent.setData(imageUri);
@@ -202,7 +211,6 @@ public class GuestDetailActivity extends BaseActivity {
 
         if (requestCode == PHOTO_REQUEST && resultCode == RESULT_OK) {
             launchMediaScanIntent();
-
             try {
                 Bitmap bitmap = decodeBitmapUri(this, imageUri);
                 if (detector.isOperational() && bitmap != null) {
@@ -227,7 +235,13 @@ public class GuestDetailActivity extends BaseActivity {
                     if (textBlocks.size() == 0) {
                         Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Scan Failed: Found nothing to scan");
                     } else {
-                        tv_guest.setText(blocks);
+
+                        /*Intent intent = new Intent();
+                        intent.putExtra("id", blocks);
+                        startActivityForResult(intent, Constants.UNIQUE_CODE);*/
+
+
+                        et_car_number.setText("" + blocks);
                     }
                 } else {
                     Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Could not set up the detector!");
@@ -238,6 +252,16 @@ public class GuestDetailActivity extends BaseActivity {
 
 
         }
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (imageUri != null) {
+            outState.putString(SAVED_INSTANCE_URI, imageUri.toString());
+            outState.putString(SAVED_INSTANCE_RESULT, et_car_number.getText().toString());
+        }
+        super.onSaveInstanceState(outState);
     }
 
 }

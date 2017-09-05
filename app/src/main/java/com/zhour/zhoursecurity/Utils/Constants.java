@@ -13,6 +13,7 @@ public class Constants {
     public static final String TOKEN = "TOKEN";
 
     public static int SPLASH_TIME_OUT = 3000;
+    public static final int UNIQUE_CODE = 20;
 
 
 
