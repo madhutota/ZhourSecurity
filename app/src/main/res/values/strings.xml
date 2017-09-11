@@ -33,6 +33,22 @@
     <string name="scan_vehicle">Scan Vehicle</string>
     <string name="enter_vehicle_number">Enter Vehicle Number</string>
     <string name="emergency">Emergency</string>
+    <string name="txt_get_details">Get Details</string>
+    <string name="user_login">USER LOGIN</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="sign_in_caps">SIGN IN</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="resident_contact">Resident Contact</string>
+    <string name="vehicle_umber">Vehicle Number</string>
+    <string name="email">Email</string>
+    <string name="count">Count</string>
+    <string name="event_type">Event Type</string>
+    <string name="resident_name">Resident Name</string>
+    <string name="vehicle_type">Vehicle Type</string>
+    <string name="visitor_contact">Visitor Contact</string>
+    <string name="visitor_name">Visitor Name</string>
+    <string name="passcode">Passcode</string>
 
 
 </resources>

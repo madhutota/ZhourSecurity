@@ -26,39 +26,44 @@ import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.zhour.zhoursecurity.R;
+import com.zhour.zhoursecurity.Utils.APIConstants;
+import com.zhour.zhoursecurity.Utils.Constants;
 import com.zhour.zhoursecurity.Utils.Utility;
+import com.zhour.zhoursecurity.asynctask.IAsyncCaller;
+import com.zhour.zhoursecurity.asynctask.ServerJSONAsyncTask;
+import com.zhour.zhoursecurity.models.Model;
+import com.zhour.zhoursecurity.parser.AuthenticateUserParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.LinkedHashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GuestDetailActivity extends BaseActivity {
+public class GuestDetailActivity extends BaseActivity implements IAsyncCaller{
 
-    @BindView(R.id.et_car_number)
-    EditText et_car_number;
+    @BindView(R.id.et_vehicle_number)
+    EditText et_vehicle_number;
 
     @BindView(R.id.btn_submit)
     Button btn_submit;
 
-    @BindView(R.id.ll_details)
-    LinearLayout ll_details;
+   /* @BindView(R.id.ll_details)
+    LinearLayout ll_details;*/
 
-    @BindView(R.id.tv_guest)
-    TextView tv_guest;
+    /*@BindView(R.id.tv_guest)
+    TextView tv_guest;*/
 
-    @BindView(R.id.et_guest_name)
-    EditText et_guest_name;
 
-    @BindView(R.id.tv_phone)
-    TextView tv_phone;
+    /*@BindView(R.id.tv_phone)
+    TextView tv_phone;*/
 
-    @BindView(R.id.et_phone)
-    EditText et_phone;
+    /*@BindView(R.id.et_phone)
+    EditText et_phone;*/
 
-    @BindView(R.id.tv_host)
+   /* @BindView(R.id.tv_host)
     TextView tv_host;
 
     @BindView(R.id.et_host_name)
@@ -68,10 +73,10 @@ public class GuestDetailActivity extends BaseActivity {
     TextView tv_flat_no;
 
     @BindView(R.id.et_flat_no)
-    EditText et_flat_no;
+    EditText et_flat_no;*/
 
-    @BindView(R.id.btn_scan_vehicle)
-    Button btn_scan_vehicle;
+   /* @BindView(R.id.btn_scan_vehicle)
+    Button btn_scan_vehicle;*/
 
 
     private static final int REQUEST_WRITE_PERMISSION = 20;
@@ -91,10 +96,9 @@ public class GuestDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_detail);
         ButterKnife.bind(this);
-        typeFace();
         if (savedInstanceState != null) {
             imageUri = Uri.parse(savedInstanceState.getString(SAVED_INSTANCE_URI));
-            et_car_number.setText(savedInstanceState.getString(SAVED_INSTANCE_RESULT));
+            et_vehicle_number.setText(savedInstanceState.getString(SAVED_INSTANCE_RESULT));
         }
         detector = new TextRecognizer.Builder(getApplicationContext()).build();
     }
@@ -104,18 +108,40 @@ public class GuestDetailActivity extends BaseActivity {
         Utility.hideSoftKeyboard(GuestDetailActivity.this, btn_submit);
 
         if (isValidFields() && isValidDigitFields()) {
-            et_car_number.setText("");
-            ll_details.setVisibility(View.VISIBLE);
+            et_vehicle_number.setText("");
+            apiCallToGetDetails();
+
+            Intent detailsIntent = new Intent(GuestDetailActivity.this,DetailsActivity.class);
+            startActivity(detailsIntent);
         }
+    }
+
+    private void apiCallToGetDetails() {
+        try {
+            LinkedHashMap linkedHashMap = new LinkedHashMap();
+
+            linkedHashMap.put("communityid", "12"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
+            linkedHashMap.put("passcode", "718310");
+
+            AuthenticateUserParser authenticateUserParser = new AuthenticateUserParser();
+            ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
+                    this, Utility.getResourcesString(this, R.string.please_wait), true,
+                    APIConstants.GET_INVITEINFO, linkedHashMap,
+                    APIConstants.REQUEST_TYPE.POST, this, authenticateUserParser);
+            Utility.execute(serverJSONAsyncTask);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /*VALIDATIONS */
 
     private boolean isValidFields() {
         boolean isValidated = false;
-        if (Utility.isValueNullOrEmpty(et_car_number.getText().toString().trim())) {
-            Utility.setSnackBar(this, et_car_number, "Please enter vehicle number");
-            et_car_number.requestFocus();
+        if (Utility.isValueNullOrEmpty(et_vehicle_number.getText().toString().trim())) {
+            Utility.setSnackBar(this, et_vehicle_number, "Please enter vehicle number");
+            et_vehicle_number.requestFocus();
         } else {
             isValidated = true;
         }
@@ -124,41 +150,16 @@ public class GuestDetailActivity extends BaseActivity {
 
     private boolean isValidDigitFields() {
         boolean isValid = true;
-        if (Utility.isValueNullOrEmpty(et_car_number.getText().toString())) {
-            Utility.setSnackBar(this, et_car_number, "Please write code");
+        if (Utility.isValueNullOrEmpty(et_vehicle_number.getText().toString())) {
+            Utility.setSnackBar(this, et_vehicle_number, "Please write code");
             isValid = false;
-        } else if (et_car_number.getText().toString().length() < 4) {
-            Utility.setSnackBar(this, et_car_number, "Code must be 4 digit");
+        } else if (et_vehicle_number.getText().toString().length() < 4) {
+            Utility.setSnackBar(this, et_vehicle_number, "Code must be 4 digit");
             isValid = false;
         }
         return isValid;
     }
 
-    @OnClick(R.id.btn_scan_vehicle)
-    void scanVehicle() {
-        ActivityCompat.requestPermissions(GuestDetailActivity.this, new
-                String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, REQUEST_WRITE_PERMISSION);
-    }
-
-    private void typeFace() {
-        /*GUSET NAME */
-        tv_guest.setTypeface(Utility.getFontAwesomeWebFont(this));
-        et_guest_name.setTypeface(Utility.getFontAwesomeWebFont(this));
-
-        /*PHONE NUMBER*/
-        tv_phone.setTypeface(Utility.getFontAwesomeWebFont(this));
-        et_phone.setTypeface(Utility.getFontAwesomeWebFont(this));
-
-       /* HOST NAME */
-        tv_host.setTypeface(Utility.getFontAwesomeWebFont(this));
-        et_host_name.setTypeface(Utility.getFontAwesomeWebFont(this));
-
-        /*FLAT NO*/
-        tv_flat_no.setTypeface(Utility.getFontAwesomeWebFont(this));
-        et_flat_no.setTypeface(Utility.getFontAwesomeWebFont(this));
-
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -168,7 +169,7 @@ public class GuestDetailActivity extends BaseActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     takePicture();
                 } else {
-                    Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Permission Denied!");
+/*                    Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Permission Denied!");*/
                 }
         }
     }
@@ -233,7 +234,7 @@ public class GuestDetailActivity extends BaseActivity {
                         }
                     }
                     if (textBlocks.size() == 0) {
-                        Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Scan Failed: Found nothing to scan");
+                       /* Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Scan Failed: Found nothing to scan");*/
                     } else {
 
                         /*Intent intent = new Intent();
@@ -241,13 +242,13 @@ public class GuestDetailActivity extends BaseActivity {
                         startActivityForResult(intent, Constants.UNIQUE_CODE);*/
 
 
-                        et_car_number.setText("" + blocks);
+                        et_vehicle_number.setText("" + blocks);
                     }
                 } else {
-                    Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Could not set up the detector!");
+                   /* Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Could not set up the detector!");*/
                 }
             } catch (Exception e) {
-                Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Failed to load Image");
+               /* Utility.setSnackBar(GuestDetailActivity.this, btn_scan_vehicle, "Failed to load Image");*/
             }
 
 
@@ -259,9 +260,18 @@ public class GuestDetailActivity extends BaseActivity {
     public void onSaveInstanceState(Bundle outState) {
         if (imageUri != null) {
             outState.putString(SAVED_INSTANCE_URI, imageUri.toString());
-            outState.putString(SAVED_INSTANCE_RESULT, et_car_number.getText().toString());
+            outState.putString(SAVED_INSTANCE_RESULT, et_vehicle_number.getText().toString());
         }
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    public void onComplete(Model model) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.zhour.zhoursecurity.R;
 import com.zhour.zhoursecurity.Utils.Constants;
+import com.zhour.zhoursecurity.Utils.Utility;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -19,17 +20,22 @@ public class SplashActivity extends AppCompatActivity {
         Runnable action = new Runnable() {
             @Override
             public void run() {
-                navigateToDashBoard();
+                navigateToSignIn();
+                if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(SplashActivity.this, Constants.TOKEN))) {
+                    Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    navigateToSignIn();
+                }
             }
         };
         mSplashHandler.postDelayed(action, Constants.SPLASH_TIME_OUT);
-
-
     }
 
     /*This method is used to navigate sign in*/
-    public void navigateToDashBoard() {
-        Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+    public void navigateToSignIn() {
+        Intent intent = new Intent(SplashActivity.this, SignInActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

@@ -16,4 +16,6 @@
     <color name="success_alert">#699864</color>
 
     <color name="error_alert">#FB5151</color>
+    <color name="color_sign_in_bar">#419BF9</color>
+    <color name="light_green">#20AF89</color>
 </resources>

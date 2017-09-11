@@ -1,5 +1,6 @@
 package com.zhour.zhoursecurity.Utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -38,24 +40,6 @@ public class Utility {
 
     private static final int CONNECTION_TIMEOUT = 25000;
 
-
-    /**
-     * GET SHARED PREFERENCES STRING DATA
-     */
-    public static String getSharedPrefStringData(Context context, String key) {
-
-        try {
-            SharedPreferences userAcountPreference = context
-                    .getSharedPreferences(Constants.APP_PREF,
-                            Context.MODE_PRIVATE);
-            return userAcountPreference.getString(key, "");
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-        return "";
-
-    }
 
 
     /**
@@ -276,6 +260,64 @@ public class Utility {
     public static Typeface setRobotoRegular(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
     }
+    public static Typeface setLucidaSansItalic(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "fonts/Lucida Sans Italic.ttf");
+    }
 
+    /**
+     * Sharedpreference method to set and get string variable
+     */
+    public static void setSharedPrefStringData(Context context, String key, String value) {
+        try {
+            if (context != null) {
+                SharedPreferences appInstallInfoSharedPref = context.getSharedPreferences(Constants.APP_PREF,
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor appInstallInfoEditor = appInstallInfoSharedPref.edit();
+                appInstallInfoEditor.putString(key, value);
+                appInstallInfoEditor.apply();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * GET SHARED PREFERENCES STRING DATA
+     */
+    public static String getSharedPrefStringData(Context context, String key) {
+
+        try {
+            SharedPreferences userAcountPreference = context
+                    .getSharedPreferences(Constants.APP_PREF,
+                            Context.MODE_PRIVATE);
+            return userAcountPreference.getString(key, "");
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return "";
+
+    }
+
+       /*
+     *
+	 *
+	 * These methods are to make async tasks concurrent, and run on parallel on
+	 * android 3+
+	 */
+
+    public static <P, T extends AsyncTask<P, ?, ?>> void execute(T task) {
+        execute(task, (P[]) null);
+    }
+
+    @SafeVarargs
+    @SuppressLint("NewApi")
+    public static <P, T extends AsyncTask<P, ?, ?>> void execute(T task,
+                                                                 P... params) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else {
+            task.execute(params);
+        }
+    }
 }
