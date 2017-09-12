@@ -49,6 +49,16 @@
     <string name="visitor_contact">Visitor Contact</string>
     <string name="visitor_name">Visitor Name</string>
     <string name="passcode">Passcode</string>
+    <string name="please_enter_pass_code">Please enter pass code</string>
+    <string name="please_enter_visitor_name">Please enter visitor name</string>
+    <string name="please_enter_visitor_contact">Please enter visitor contact</string>
+    <string name="please_select_vehicle_type">Please select vehicle type</string>
+    <string name="please_select_resident_name">Please select resident name</string>
+    <string name="please_select_event_type">Please select event type</string>
+    <string name="please_enter_count">Please enter count</string>
+    <string name="please_enter_email">Please enter email</string>
+    <string name="please_enter_vehicle_number">Please enter vehicle number</string>
+    <string name="please_enter_resident_contact">Please enter resident contact</string>
 
 
 </resources>

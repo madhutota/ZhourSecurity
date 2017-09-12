@@ -103,6 +103,9 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller{
         detector = new TextRecognizer.Builder(getApplicationContext()).build();
     }
 
+    /**
+     * METHOD TO SUBMIT DATA
+     * */
     @OnClick(R.id.btn_submit)
     void submitCarDetails() {
         Utility.hideSoftKeyboard(GuestDetailActivity.this, btn_submit);
@@ -116,12 +119,15 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller{
         }
     }
 
+    /**
+     * API CALL TO GET THE DETAILS
+     * */
     private void apiCallToGetDetails() {
         try {
             LinkedHashMap linkedHashMap = new LinkedHashMap();
 
             linkedHashMap.put("communityid", "12"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
-            linkedHashMap.put("passcode", "718310");
+            linkedHashMap.put("passcode", "716536");
 
             AuthenticateUserParser authenticateUserParser = new AuthenticateUserParser();
             ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
