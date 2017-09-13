@@ -21,14 +21,7 @@ public class APIConstants {
     public static String AUTHENTICATE_USER = BASE_URL + "authenticateUser";
     public static String GET_LOOKUP_DATA_BY_ENTITY_NAME = BASE_URL + "getLookupDataByEntityName";
     public static String SAVE_INVITE = BASE_URL + "saveInvite";
-    public static String GET_INVITES = BASE_URL + "getInvites";
-    public static String GET_MAID_INFO = BASE_URL + "getMaidInfo";
-    public static String GET_VEHICLE_INFO = BASE_URL + "getVehicleInfo";
-    public static String GET_NOTICES = BASE_URL + "getNotices";
-    public static String LOGOUT = BASE_URL + "logoutUser";
-    public static String GET_COMPLINTS = BASE_URL + "getComplaints";
-    public static String CREATE_OR_UPDATE_COMPLAINT = BASE_URL + "createOrUpdateComplaint";
-    public static String UPDATE_INVITEES = BASE_URL + "updateInvitees";
-    public static String GET_INVITEINFO = BASE_URL + "getInviteInfo";
+    public static String CREATE_OR_UPDATE_VISITOR = BASE_URL + "createOrUpdateVisitor";
+    public static String GET_INVITE_INFO = BASE_URL + "getInviteInfo";
 
 }

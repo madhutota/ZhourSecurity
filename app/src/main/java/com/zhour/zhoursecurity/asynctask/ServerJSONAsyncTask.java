@@ -180,7 +180,8 @@ public class ServerJSONAsyncTask extends BaseAsyncTask {
                 Writer writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                 if (mUrl.contains(APIConstants.AUTHENTICATE_USER)
                         || mUrl.contains(APIConstants.GET_LOOKUP_DATA_BY_ENTITY_NAME)
-                        || mUrl.contains(APIConstants.GET_INVITEINFO)
+                        || mUrl.contains(APIConstants.GET_INVITE_INFO)
+                        || mUrl.contains(APIConstants.CREATE_OR_UPDATE_VISITOR)
                         || mUrl.contains(APIConstants.SAVE_INVITE)
                         ) {
                     Utility.showLog("mParams", "" + getURL(mParams));

@@ -54,7 +54,7 @@
     <string name="please_enter_visitor_name">Please enter visitor name</string>
     <string name="please_enter_visitor_contact">Please enter visitor contact</string>
     <string name="please_select_vehicle_type">Please select vehicle type</string>
-    <string name="please_select_resident_name">Please select resident name</string>
+    <string name="please_select_resident_name">Please enter resident name</string>
     <string name="please_select_event_type">Please select event type</string>
     <string name="please_enter_count">Please enter count</string>
     <string name="please_enter_email">Please enter email</string>

@@ -68,7 +68,7 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
             VisitorParser visitorParser = new VisitorParser();
             ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
                     this, Utility.getResourcesString(this, R.string.please_wait), true,
-                    APIConstants.GET_INVITEINFO, linkedHashMap,
+                    APIConstants.GET_INVITE_INFO, linkedHashMap,
                     APIConstants.REQUEST_TYPE.POST, this, visitorParser);
             Utility.execute(serverJSONAsyncTask);
         } catch (Exception e) {
@@ -104,5 +104,5 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
             }
         }
     }
-    
+
 }

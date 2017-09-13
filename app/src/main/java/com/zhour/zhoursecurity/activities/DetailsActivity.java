@@ -16,16 +16,17 @@ import android.widget.TextView;
 
 import com.zhour.zhoursecurity.R;
 import com.zhour.zhoursecurity.Utils.APIConstants;
+import com.zhour.zhoursecurity.Utils.Constants;
 import com.zhour.zhoursecurity.Utils.Utility;
 import com.zhour.zhoursecurity.adapters.SpinnerAdapter;
 import com.zhour.zhoursecurity.asynctask.IAsyncCaller;
 import com.zhour.zhoursecurity.asynctask.ServerJSONAsyncTask;
-import com.zhour.zhoursecurity.models.LookUpEventsTypeModel;
 import com.zhour.zhoursecurity.models.LookUpVehicleTypeModel;
 import com.zhour.zhoursecurity.models.Model;
 import com.zhour.zhoursecurity.models.SpinnerModel;
-import com.zhour.zhoursecurity.parser.LookUpEventTypeParser;
+import com.zhour.zhoursecurity.models.VisitorModel;
 import com.zhour.zhoursecurity.parser.LookUpVehicleTypeParser;
+import com.zhour.zhoursecurity.parser.VisitorParser;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -44,9 +45,6 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
     Toolbar toolbar;
     @BindView(R.id.scrollView)
     NestedScrollView scrollView;
-
-    @BindView(R.id.et_pass_code)
-    EditText et_pass_code;
 
     @BindView(R.id.et_visitor_name)
     EditText et_visitor_name;
@@ -74,8 +72,9 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
     EditText et_resident_contact;
     @BindView(R.id.btn_submit)
     Button btn_submit;
-    private LookUpEventsTypeModel lookUpEventsTypeModel;
     private LookUpVehicleTypeModel lookUpVehicleTypeModel;
+    private VisitorModel visitorModel;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,36 +86,42 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
     }
 
     /**
-     * METHOD TO INITIALIZE THE UI*/
+     * METHOD TO INITIALIZE THE UI
+     */
     private void initUI() {
-        et_pass_code.setTypeface(Utility.setLucidaSansItalic(this));
-        et_visitor_name.setTypeface(Utility.setLucidaSansItalic(this));
-        et_visitor_contact.setTypeface(Utility.setLucidaSansItalic(this));
-        et_vehicle_type.setTypeface(Utility.setLucidaSansItalic(this));
-        et_resident_name.setTypeface(Utility.setLucidaSansItalic(this));
-        et_event_type.setTypeface(Utility.setLucidaSansItalic(this));
-        et_count.setTypeface(Utility.setLucidaSansItalic(this));
-        et_email.setTypeface(Utility.setLucidaSansItalic(this));
-        et_vehicle_number.setTypeface(Utility.setLucidaSansItalic(this));
-        et_resident_contact.setTypeface(Utility.setLucidaSansItalic(this));
+        et_visitor_name.setTypeface(Utility.setRobotoRegular(this));
+        et_visitor_contact.setTypeface(Utility.setRobotoRegular(this));
+        et_vehicle_type.setTypeface(Utility.setRobotoRegular(this));
+        et_resident_name.setTypeface(Utility.setRobotoRegular(this));
+        et_event_type.setTypeface(Utility.setRobotoRegular(this));
+        et_count.setTypeface(Utility.setRobotoRegular(this));
+        et_email.setTypeface(Utility.setRobotoRegular(this));
+        et_vehicle_number.setTypeface(Utility.setRobotoRegular(this));
+        et_resident_contact.setTypeface(Utility.setRobotoRegular(this));
         btn_submit.setTypeface(Utility.setRobotoRegular(this));
 
-        getEventTypes("Event%20Types");
+        intent = getIntent();
+        if (intent.hasExtra(Constants.VISITOR_MODEL)) {
+            visitorModel = (VisitorModel) intent.getSerializableExtra(Constants.VISITOR_MODEL);
+            setVisitorModelData();
+        }
+
         getVehicleTypes("Vehicle%20Types");
     }
 
     /**
-     * ON CLICK FOR EVENT TYPE
-     * */
-    @OnClick(R.id.et_event_type)
-    void eventDialog() {
-        showSpinnerDialog(this, Utility.getResourcesString(this, R.string.event_type),
-                lookUpEventsTypeModel.getLookupNames(), 1);
+     * This method is used to set the data
+     */
+    private void setVisitorModelData() {
+        et_visitor_name.setText(visitorModel.getVisitorname());
+        et_visitor_contact.setText(visitorModel.getContactnumber());
+        et_resident_name.setText(visitorModel.getVisitorname());
+        et_event_type.setText(visitorModel.getInvitetype());
     }
 
     /**
      * ON CLICK FOR VEHICLE TYPE
-     * */
+     */
     @OnClick(R.id.et_vehicle_type)
     void vehicleDialog() {
         showSpinnerDialog(this, Utility.getResourcesString(this, R.string.vehicle_type),
@@ -125,12 +130,47 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
 
     /**
      * ON CLICK FOR SUBMIT FORM
-     * */
+     */
     @OnClick(R.id.btn_submit)
     void submitDetails() {
         if (isValid()) {
-            Utility.showToastMessage(this, "SUBMITTED");
+            try {
+                LinkedHashMap linkedHashMap = new LinkedHashMap();
+
+                linkedHashMap.put("visitorid", "0");
+                linkedHashMap.put("visitorname", et_visitor_name.getText().toString());
+                linkedHashMap.put("visitorcontact", et_visitor_contact.getText().toString());
+                linkedHashMap.put("emailid", et_email.getText().toString());
+                linkedHashMap.put("visitorcount", et_count.getText().toString());
+                linkedHashMap.put("vehicletypeid", getVehicleTypeId(et_vehicle_type.getText().toString()));
+                linkedHashMap.put("vehiclenumber", et_vehicle_number.getText().toString());
+                linkedHashMap.put("eventtypeid", visitorModel.getInvitetypeid());
+                linkedHashMap.put("residentid", visitorModel.getResidentid());
+                linkedHashMap.put("communityid", "12"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
+
+                VisitorParser visitorParser = new VisitorParser();
+                ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
+                        this, Utility.getResourcesString(this, R.string.please_wait), true,
+                        APIConstants.CREATE_OR_UPDATE_VISITOR, linkedHashMap,
+                        APIConstants.REQUEST_TYPE.POST, this, visitorParser);
+                Utility.execute(serverJSONAsyncTask);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    /**
+     * This method is used to get the vehicle type id
+     */
+    private String getVehicleTypeId(String s) {
+        String mVehicleTypeId = "";
+        for (int i = 0; i < lookUpVehicleTypeModel.getLookupNames().size(); i++) {
+            if (lookUpVehicleTypeModel.getLookUpModels().get(i).getLookupname().equals(s)) {
+                mVehicleTypeId = lookUpVehicleTypeModel.getLookUpModels().get(i).getLookupid();
+            }
+        }
+        return mVehicleTypeId;
     }
 
     /**
@@ -138,21 +178,14 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
      */
     private boolean isValid() {
         boolean isTrue = true;
-        if (Utility.isValueNullOrEmpty(et_pass_code.getText().toString())) {
-            isTrue = false;
-            Utility.setSnackBar(this, et_pass_code, Utility.getResourcesString(this, R.string.please_enter_pass_code));
-            et_pass_code.setFocusable(true);
-
-        } else if (Utility.isValueNullOrEmpty(et_visitor_name.getText().toString())) {
+        if (Utility.isValueNullOrEmpty(et_visitor_name.getText().toString())) {
             isTrue = false;
             Utility.setSnackBar(this, et_visitor_name, Utility.getResourcesString(this, R.string.please_enter_visitor_name));
             et_visitor_name.setFocusable(true);
-
         } else if (Utility.isValueNullOrEmpty(et_visitor_contact.getText().toString())) {
             isTrue = false;
             Utility.setSnackBar(this, et_visitor_contact, Utility.getResourcesString(this, R.string.please_enter_visitor_contact));
             et_visitor_contact.setFocusable(true);
-
         } else if (Utility.isValueNullOrEmpty(et_vehicle_type.getText().toString())) {
             isTrue = false;
             Utility.setSnackBar(this, et_vehicle_type, Utility.getResourcesString(this, R.string.please_select_vehicle_type));
@@ -160,11 +193,6 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
         } else if (Utility.isValueNullOrEmpty(et_resident_name.getText().toString())) {
             isTrue = false;
             Utility.setSnackBar(this, et_resident_name, Utility.getResourcesString(this, R.string.please_select_resident_name));
-
-        } else if (Utility.isValueNullOrEmpty(et_event_type.getText().toString())) {
-            isTrue = false;
-            Utility.setSnackBar(this, et_event_type, Utility.getResourcesString(this, R.string.please_select_event_type));
-            et_pass_code.setFocusable(true);
 
         } else if (Utility.isValueNullOrEmpty(et_count.getText().toString())) {
             isTrue = false;
@@ -190,27 +218,10 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
         return isTrue;
     }
 
-    /**
-     * API CALL TO GET THE EVENT TYPES
-     * */
-    private void getEventTypes(String invite_types) {
-        try {
-            LinkedHashMap linkedHashMap = new LinkedHashMap();
-            linkedHashMap.put("entityname", invite_types);
-            LookUpEventTypeParser lookUpEventTypeParser = new LookUpEventTypeParser();
-            ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
-                    this, Utility.getResourcesString(this, R.string.please_wait), true,
-                    APIConstants.GET_LOOKUP_DATA_BY_ENTITY_NAME, linkedHashMap,
-                    APIConstants.REQUEST_TYPE.POST, this, lookUpEventTypeParser);
-            Utility.execute(serverJSONAsyncTask);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * API CALL TO GET THE VEHICLE TYPES
-     * */
+     */
     private void getVehicleTypes(String invite_types) {
         try {
             LinkedHashMap linkedHashMap = new LinkedHashMap();
@@ -228,27 +239,20 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
 
     /**
      * API RESPONSE MODEL METHOD
-     * */
+     */
     @Override
     public void onComplete(Model model) {
         if (model != null) {
-            if (model instanceof LookUpEventsTypeModel) {
-                lookUpEventsTypeModel = (LookUpEventsTypeModel) model;
-            } else if (model instanceof LookUpVehicleTypeModel) {
+            if (model instanceof LookUpVehicleTypeModel) {
                 lookUpVehicleTypeModel = (LookUpVehicleTypeModel) model;
             }
         }
 
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
-
     /**
      * METHOD TO SHOW SPINNER DIALOG
-     * */
+     */
     public void showSpinnerDialog(final Context context, final String title,
                                   ArrayList<SpinnerModel> itemsList, final int id) {
 
@@ -273,9 +277,6 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
                         SpinnerModel mData = (SpinnerModel) adapter.getItem(which);
                         String text = mData.getTitle();
                         switch (id) {
-                            case 1:
-                                et_event_type.setText(text);
-                                break;
                             case 2:
                                 et_vehicle_type.setText(text);
                                 break;
