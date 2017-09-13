@@ -17,12 +17,6 @@ import android.widget.EditText;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private int mClosePressCount = 0;
-
-    public Dialog progressDialog = null;
-    public Dialog alertDialog = null;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,14 +1,7 @@
 package com.zhour.zhoursecurity.asynctask;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.compat.BuildConfig;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
-import android.widget.TextView;
-
 
 import com.zhour.zhoursecurity.R;
 import com.zhour.zhoursecurity.Utils.APIConstants;
@@ -36,10 +29,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.zhour.zhoursecurity.Utils.APIConstants.REQUEST_TYPE.DELETE;
-import static com.zhour.zhoursecurity.Utils.APIConstants.REQUEST_TYPE.GET;
 import static com.zhour.zhoursecurity.Utils.APIConstants.REQUEST_TYPE.PATCH;
-import static com.zhour.zhoursecurity.Utils.APIConstants.REQUEST_TYPE.POST;
 
 /**
  * Created by ShankarRao on 3/28/2016.
@@ -126,7 +116,6 @@ public class ServerJSONAsyncTask extends BaseAsyncTask {
     }
 
 
-
     private int parseResponse(String response) {
         if (response != null) {
             Utility.showLog("RESPONSE<><>", response);
@@ -174,6 +163,7 @@ public class ServerJSONAsyncTask extends BaseAsyncTask {
             connection.setRequestProperty("Accept", "application/json");
             if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(mContext, Constants.TOKEN))) {
                 String token = Utility.getSharedPrefStringData(mContext, Constants.TOKEN);
+                Utility.showLog("Token ", "Token : " + token);
                 connection.setRequestProperty("token", token);
             }
             connection.setUseCaches(false);
@@ -190,6 +180,7 @@ public class ServerJSONAsyncTask extends BaseAsyncTask {
                 Writer writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                 if (mUrl.contains(APIConstants.AUTHENTICATE_USER)
                         || mUrl.contains(APIConstants.GET_LOOKUP_DATA_BY_ENTITY_NAME)
+                        || mUrl.contains(APIConstants.GET_INVITEINFO)
                         || mUrl.contains(APIConstants.SAVE_INVITE)
                         ) {
                     Utility.showLog("mParams", "" + getURL(mParams));
@@ -258,7 +249,7 @@ public class ServerJSONAsyncTask extends BaseAsyncTask {
                 List<HttpCookie> cookies = msCookieManager.getCookieStore().getCookies();
                 if (cookies != null) {
                     for (HttpCookie cookie : cookies) {
-                      //  Utility.setSharedPrefStringData(mContext, Constants.TOKEN, cookie.getValue());
+                        //  Utility.setSharedPrefStringData(mContext, Constants.TOKEN, cookie.getValue());
                     }
                 }
             }
