@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhour.zhoursecurity">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -40,9 +41,10 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".activities.GuestAndStaffActivity" />
         <activity android:name=".activities.GuestDetailActivity" />
-        <activity android:name=".activities.StaffDetailActivity"/>
-        <activity android:name=".activities.SignInActivity"/>
-        <activity android:name=".activities.DetailsActivity"/>
+        <activity android:name=".activities.StaffDetailActivity" />
+        <activity android:name=".activities.SignInActivity" />
+        <activity android:name=".activities.StaffScanActivity" />
+        <activity android:name=".activities.DetailsActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

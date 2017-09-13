@@ -19,7 +19,6 @@ public class GuestAndStaffActivity extends BaseActivity {
     @BindView(R.id.ll_staff)
     LinearLayout ll_staff;
 
-
     @BindView(R.id.ll_guest)
     LinearLayout ll_guest;
 
@@ -47,17 +46,22 @@ public class GuestAndStaffActivity extends BaseActivity {
 
     }
 
+    /**
+     * This method is used to navigate to staff scan
+     */
     @OnClick(R.id.ll_staff)
     void getStaff() {
-
+        Intent intent = new Intent(getApplicationContext(), StaffScanActivity.class);
+        startActivity(intent);
     }
 
+
+    /**
+     * This method is used to navigate for guest store
+     */
     @OnClick(R.id.ll_guest)
     void getGuest() {
         Intent intent = new Intent(getApplicationContext(), GuestDetailActivity.class);
         startActivity(intent);
-
     }
-
-
 }

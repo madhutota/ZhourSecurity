@@ -146,7 +146,7 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
                 linkedHashMap.put("vehiclenumber", et_vehicle_number.getText().toString());
                 linkedHashMap.put("eventtypeid", visitorModel.getInvitetypeid());
                 linkedHashMap.put("residentid", visitorModel.getResidentid());
-                linkedHashMap.put("communityid", "12"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
+                linkedHashMap.put("communityid", "2"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
 
                 VisitorParser visitorParser = new VisitorParser();
                 ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(

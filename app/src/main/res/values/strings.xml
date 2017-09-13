@@ -62,4 +62,7 @@
     <string name="please_enter_resident_contact">Please enter resident contact</string>
 
 
+    <string name="rfid_number">RFID Number</string>
+    <string name="reading_rfid_data">Reading RFID Data</string>
+
 </resources>
