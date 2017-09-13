@@ -26,6 +26,8 @@ public class Constants {
     public static final String COMMUNITY_NAME = "COMMUNITY_NAME";
     public static final String RESIDENT_ID = "RESIDENT_ID";
 
+    public static final String VISITOR_MODEL = "VISITOR_MODEL";
+
 
 
 }

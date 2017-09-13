@@ -25,18 +25,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/drawable_white_solid_et_bg"
-        android:layout_marginTop="@dimen/_40dp"
-        android:layout_marginStart="@dimen/_10dp"
         android:layout_marginEnd="@dimen/_10dp"
-        android:paddingBottom="@dimen/_3dp"
-        android:orientation="horizontal">
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginTop="@dimen/_40dp"
+        android:background="@drawable/drawable_white_solid_et_bg"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/_3dp">
 
         <LinearLayout
             android:layout_width="@dimen/_50dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10dp"
             android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_10dp"
             android:orientation="vertical">
 
             <ImageView
@@ -61,11 +61,13 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/et_vehicle_number"
+                android:id="@+id/enter_pass_code"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40dp"
                 android:background="@android:color/transparent"
-                android:hint="@string/enter_vehicle_number"
+                android:gravity="center_vertical"
+                android:hint="@string/enter_pass_code"
+                android:inputType="number"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sp" />
 
