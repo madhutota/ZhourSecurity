@@ -24,8 +24,10 @@ import com.zhour.zhoursecurity.asynctask.ServerJSONAsyncTask;
 import com.zhour.zhoursecurity.models.LookUpVehicleTypeModel;
 import com.zhour.zhoursecurity.models.Model;
 import com.zhour.zhoursecurity.models.SpinnerModel;
+import com.zhour.zhoursecurity.models.SuccessModel;
 import com.zhour.zhoursecurity.models.VisitorModel;
 import com.zhour.zhoursecurity.parser.LookUpVehicleTypeParser;
+import com.zhour.zhoursecurity.parser.SuccessParser;
 import com.zhour.zhoursecurity.parser.VisitorParser;
 
 import java.util.ArrayList;
@@ -73,6 +75,7 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
     @BindView(R.id.btn_submit)
     Button btn_submit;
     private LookUpVehicleTypeModel lookUpVehicleTypeModel;
+    private SuccessModel successModel;
     private VisitorModel visitorModel;
     private Intent intent;
 
@@ -148,11 +151,11 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
                 linkedHashMap.put("residentid", visitorModel.getResidentid());
                 linkedHashMap.put("communityid", "2"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
 
-                VisitorParser visitorParser = new VisitorParser();
+                SuccessParser successParser = new SuccessParser();
                 ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
                         this, Utility.getResourcesString(this, R.string.please_wait), true,
                         APIConstants.CREATE_OR_UPDATE_VISITOR, linkedHashMap,
-                        APIConstants.REQUEST_TYPE.POST, this, visitorParser);
+                        APIConstants.REQUEST_TYPE.POST, this, successParser);
                 Utility.execute(serverJSONAsyncTask);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -245,6 +248,10 @@ public class DetailsActivity extends BaseActivity implements IAsyncCaller {
         if (model != null) {
             if (model instanceof LookUpVehicleTypeModel) {
                 lookUpVehicleTypeModel = (LookUpVehicleTypeModel) model;
+            } else if (model instanceof SuccessModel) {
+                successModel = (SuccessModel) model;
+                Utility.showToastMessage(DetailsActivity.this, successModel.getMessage());
+                onBackPressed();
             }
         }
 
