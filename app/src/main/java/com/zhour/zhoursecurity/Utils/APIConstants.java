@@ -23,5 +23,6 @@ public class APIConstants {
     public static String SAVE_INVITE = BASE_URL + "saveInvite";
     public static String CREATE_OR_UPDATE_VISITOR = BASE_URL + "createOrUpdateVisitor";
     public static String GET_INVITE_INFO = BASE_URL + "getInviteInfo";
+    public static String DEL_VISITOR = BASE_URL + "delVisitor";
 
 }

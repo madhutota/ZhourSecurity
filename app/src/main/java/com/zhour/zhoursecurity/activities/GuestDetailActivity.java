@@ -34,12 +34,19 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
     Toolbar toolbar;
 
     private VisitorModel visitorModel;
+    private String mPurpose;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_detail);
         ButterKnife.bind(this);
+        intent = getIntent();
+        if (intent.hasExtra(Constants.PURPOSE)) {
+            mPurpose = intent.getStringExtra(Constants.PURPOSE);
+        }
+
     }
 
     /**
@@ -59,22 +66,38 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
      * API CALL TO GET THE DETAILS
      */
     private void apiCallToGetDetails() {
-        try {
-            LinkedHashMap linkedHashMap = new LinkedHashMap();
 
-            linkedHashMap.put("communityid", "12"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
-            linkedHashMap.put("passcode", "716536");
+        if (mPurpose.equalsIgnoreCase(Constants.IN)) {
+            try {
+                LinkedHashMap linkedHashMap = new LinkedHashMap();
 
-            VisitorParser visitorParser = new VisitorParser();
-            ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
-                    this, Utility.getResourcesString(this, R.string.please_wait), true,
-                    APIConstants.GET_INVITE_INFO, linkedHashMap,
-                    APIConstants.REQUEST_TYPE.POST, this, visitorParser);
-            Utility.execute(serverJSONAsyncTask);
-        } catch (Exception e) {
-            e.printStackTrace();
+                linkedHashMap.put("communityid", "12"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
+                linkedHashMap.put("passcode", "716536");
+
+                VisitorParser visitorParser = new VisitorParser();
+                ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
+                        this, Utility.getResourcesString(this, R.string.please_wait), true,
+                        APIConstants.GET_INVITE_INFO, linkedHashMap,
+                        APIConstants.REQUEST_TYPE.POST, this, visitorParser);
+                Utility.execute(serverJSONAsyncTask);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            try {
+                LinkedHashMap linkedHashMap = new LinkedHashMap();
+                linkedHashMap.put("vehiclenumber", "716536");
+                VisitorParser visitorParser = new VisitorParser();
+                ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
+                        this, Utility.getResourcesString(this, R.string.please_wait), true,
+                        APIConstants.DEL_VISITOR, linkedHashMap,
+                        APIConstants.REQUEST_TYPE.POST, this, visitorParser);
+                Utility.execute(serverJSONAsyncTask);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     /**
@@ -86,7 +109,7 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
             Utility.setSnackBar(this, enter_pass_code, "Please write code");
             isValid = false;
         } else if (enter_pass_code.getText().toString().length() < 4) {
-            Utility.setSnackBar(this, enter_pass_code, "Code must be 4 digit");
+            Utility.setSnackBar(this, enter_pass_code, "Code must be not less then 4 digits");
             isValid = false;
         }
         return isValid;

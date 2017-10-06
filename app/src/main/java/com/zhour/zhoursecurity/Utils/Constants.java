@@ -28,6 +28,9 @@ public class Constants {
 
     public static final String VISITOR_MODEL = "VISITOR_MODEL";
 
+    public static final String PURPOSE = "PURPOSE";
+    public static final String OUT = "OUT";
+    public static final String IN = "IN";
 
 
 }

@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhour.zhoursecurity.R;
+import com.zhour.zhoursecurity.Utils.Constants;
 import com.zhour.zhoursecurity.Utils.Utility;
 
 import butterknife.BindView;
@@ -30,6 +31,8 @@ public class GuestAndStaffActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    private String mPurpose;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,10 @@ public class GuestAndStaffActivity extends BaseActivity {
         tv_guest.setTypeface(Utility.getFontAwesomeWebFont(this));
         tv_staff.setTypeface(Utility.getFontAwesomeWebFont(this));
 
+        intent = getIntent();
+        if (intent.hasExtra(Constants.PURPOSE)) {
+            mPurpose = intent.getStringExtra(Constants.PURPOSE);
+        }
     }
 
     /**
@@ -52,6 +59,7 @@ public class GuestAndStaffActivity extends BaseActivity {
     @OnClick(R.id.ll_staff)
     void getStaff() {
         Intent intent = new Intent(getApplicationContext(), StaffScanActivity.class);
+        intent.putExtra(Constants.PURPOSE, mPurpose);
         startActivity(intent);
     }
 
@@ -62,6 +70,7 @@ public class GuestAndStaffActivity extends BaseActivity {
     @OnClick(R.id.ll_guest)
     void getGuest() {
         Intent intent = new Intent(getApplicationContext(), GuestDetailActivity.class);
+        intent.putExtra(Constants.PURPOSE, mPurpose);
         startActivity(intent);
     }
 }

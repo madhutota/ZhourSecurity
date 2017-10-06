@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.zhour.zhoursecurity.R;
+import com.zhour.zhoursecurity.Utils.Constants;
 import com.zhour.zhoursecurity.Utils.Utility;
 
 import butterknife.BindView;
@@ -40,18 +41,20 @@ public class DashboardActivity extends BaseActivity {
     @OnClick(R.id.tv_in)
     void navigateIn() {
         Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
+        intent.putExtra(Constants.PURPOSE, Constants.IN);
         startActivity(intent);
     }
 
     @OnClick(R.id.tv_out)
     void navigateOut() {
         Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
+        intent.putExtra(Constants.PURPOSE, Constants.OUT);
         startActivity(intent);
     }
 
     @OnClick(R.id.tv_emergency)
     void navigateEmergency() {
-        Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
+        startActivity(intent);*/
     }
 }
