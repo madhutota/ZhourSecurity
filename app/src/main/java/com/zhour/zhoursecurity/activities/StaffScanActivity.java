@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 
 import com.zhour.zhoursecurity.R;
+import com.zhour.zhoursecurity.Utils.Constants;
 import com.zhour.zhoursecurity.Utils.Utility;
 import com.zhour.zhoursecurity.asynctask.IAsyncCaller;
 import com.zhour.zhoursecurity.models.Model;
@@ -29,9 +30,8 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
     @BindView(R.id.et_id)
     EditText et_id;
 
+    private String mPurpose;
     private Intent intent;
-    private String mType;
-    private String mMode;
 
 
     @Override
@@ -39,12 +39,10 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_scan);
         ButterKnife.bind(this);
-        /*intent = getIntent();
-        if (intent.hasExtra(Constants.TYPE)) {
-            mType = intent.getStringExtra(Constants.TYPE);
-            mMode = intent.getStringExtra(Constants.MODE);
-            tv_title.setText(mType.toUpperCase() + " " + mMode.toUpperCase());
-        }*/
+        intent = getIntent();
+        if (intent.hasExtra(Constants.PURPOSE)) {
+            mPurpose = intent.getStringExtra(Constants.PURPOSE);
+        }
 
         et_id.addTextChangedListener(new TextWatcher() {
             @Override
