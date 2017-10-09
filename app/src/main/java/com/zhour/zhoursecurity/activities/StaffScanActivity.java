@@ -5,14 +5,16 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.TextView;
-
 
 import com.zhour.zhoursecurity.R;
+import com.zhour.zhoursecurity.Utils.APIConstants;
 import com.zhour.zhoursecurity.Utils.Constants;
 import com.zhour.zhoursecurity.Utils.Utility;
 import com.zhour.zhoursecurity.asynctask.IAsyncCaller;
+import com.zhour.zhoursecurity.asynctask.ServerJSONAsyncTask;
 import com.zhour.zhoursecurity.models.Model;
+import com.zhour.zhoursecurity.models.RFIDModel;
+import com.zhour.zhoursecurity.parser.RFIDParser;
 
 import org.json.JSONArray;
 
@@ -68,20 +70,16 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
             try {
                 LinkedHashMap linkedHashMap = new LinkedHashMap();
                 JSONArray jsonArray = new JSONArray();
-               /* linkedHashMap.put("RFId", et_id.getText().toString());
-                linkedHashMap.put("Type", mType);
-                linkedHashMap.put("Time", Utility.getTime());
-                linkedHashMap.put("Date", Utility.getDate());
-                linkedHashMap.put("Year", Utility.getYear());
-                linkedHashMap.put("Month", Utility.getMonth());
-                linkedHashMap.put("Month", Utility.getMonth());
-                linkedHashMap.put("Mode", mMode);
+                linkedHashMap.put("visitid", "0");
+                linkedHashMap.put("staffid", et_id.getText().toString());
+                //linkedHashMap.put("communityid", "12");
+                linkedHashMap.put("communityid", Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID));
                 RFIDParser rfidParser = new RFIDParser();
                 ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
                         this, Utility.getResourcesString(this, R.string.please_wait), true,
-                        APIConstants.CREATE_ESCORT_MESS_ATTENDANCE, linkedHashMap,
+                        APIConstants.CREATE_OR_UPDATE_STAFF_VISIT, linkedHashMap,
                         APIConstants.REQUEST_TYPE.POST, this, rfidParser);
-                Utility.execute(serverJSONAsyncTask);*/
+                Utility.execute(serverJSONAsyncTask);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -102,10 +100,10 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
     @Override
     public void onComplete(Model model) {
         if (model != null) {
-            /*if (model instanceof RFIDModel) {
+            if (model instanceof RFIDModel) {
                 RFIDModel mRFIDModel = (RFIDModel) model;
-                Utility.showToastMessage(DashBoardActivity.this, "Student Name: " + mRFIDModel.getStudentName());
-            }*/
+                // Utility.showToastMessage(StaffScanActivity.this, "Student Name: " + mRFIDModel.getStudentName());
+            }
         }
     }
 }
