@@ -59,7 +59,7 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 9)
+                if (s.length() > 2)
                     sendDataToServer();
             }
         });
@@ -67,21 +67,36 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
 
     void sendDataToServer() {
         if (isValidFields()) {
-            try {
-                LinkedHashMap linkedHashMap = new LinkedHashMap();
-                JSONArray jsonArray = new JSONArray();
-                linkedHashMap.put("visitid", "0");
-                linkedHashMap.put("staffid", et_id.getText().toString());
-                //linkedHashMap.put("communityid", "12");
-                linkedHashMap.put("communityid", Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID));
-                RFIDParser rfidParser = new RFIDParser();
-                ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
-                        this, Utility.getResourcesString(this, R.string.please_wait), true,
-                        APIConstants.CREATE_OR_UPDATE_STAFF_VISIT, linkedHashMap,
-                        APIConstants.REQUEST_TYPE.POST, this, rfidParser);
-                Utility.execute(serverJSONAsyncTask);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (mPurpose.equalsIgnoreCase(Constants.OUT)) {
+                try {
+                    LinkedHashMap linkedHashMap = new LinkedHashMap();
+                    linkedHashMap.put("staffid", "1");
+                    RFIDParser rfidParser = new RFIDParser();
+                    ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
+                            this, Utility.getResourcesString(this, R.string.please_wait), true,
+                            APIConstants.DEL_STAFF_VISIT, linkedHashMap,
+                            APIConstants.REQUEST_TYPE.POST, this, rfidParser);
+                    Utility.execute(serverJSONAsyncTask);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    LinkedHashMap linkedHashMap = new LinkedHashMap();
+                    linkedHashMap.put("visitid", "0");
+                    //linkedHashMap.put("staffid", et_id.getText().toString());
+                    linkedHashMap.put("staffid", "1");
+                    linkedHashMap.put("communityid", "12");
+                    //linkedHashMap.put("communityid", Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID));
+                    RFIDParser rfidParser = new RFIDParser();
+                    ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
+                            this, Utility.getResourcesString(this, R.string.please_wait), true,
+                            APIConstants.CREATE_OR_UPDATE_STAFF_VISIT, linkedHashMap,
+                            APIConstants.REQUEST_TYPE.POST, this, rfidParser);
+                    Utility.execute(serverJSONAsyncTask);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -102,7 +117,8 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
         if (model != null) {
             if (model instanceof RFIDModel) {
                 RFIDModel mRFIDModel = (RFIDModel) model;
-                // Utility.showToastMessage(StaffScanActivity.this, "Student Name: " + mRFIDModel.getStudentName());
+                Utility.showToastMessage(StaffScanActivity.this, "" + mRFIDModel.getOutput());
+                et_id.setText("");
             }
         }
     }

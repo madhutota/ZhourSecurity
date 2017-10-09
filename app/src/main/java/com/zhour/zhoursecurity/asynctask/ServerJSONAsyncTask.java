@@ -182,6 +182,9 @@ public class ServerJSONAsyncTask extends BaseAsyncTask {
                         || mUrl.contains(APIConstants.GET_LOOKUP_DATA_BY_ENTITY_NAME)
                         || mUrl.contains(APIConstants.GET_INVITE_INFO)
                         || mUrl.contains(APIConstants.CREATE_OR_UPDATE_VISITOR)
+                        || mUrl.contains(APIConstants.DEL_STAFF_VISIT)
+                        || mUrl.contains(APIConstants.DEL_VISITOR)
+                        || mUrl.contains(APIConstants.CREATE_OR_UPDATE_STAFF_VISIT)
                         || mUrl.contains(APIConstants.SAVE_INVITE)
                         ) {
                     Utility.showLog("mParams", "" + getURL(mParams));

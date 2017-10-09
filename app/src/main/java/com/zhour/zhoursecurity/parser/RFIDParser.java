@@ -16,6 +16,14 @@ public class RFIDParser implements Parser<Model> {
         RFIDModel mRFIDModel = new RFIDModel();
         try {
             JSONObject jsonObject = new JSONObject(s);
+            if (jsonObject.has("IsError"))
+                mRFIDModel.setIsError(jsonObject.optBoolean("IsError"));
+            if (jsonObject.has("Message"))
+                mRFIDModel.setMessage(jsonObject.optString("Message"));
+            if (jsonObject.has("Error"))
+                mRFIDModel.setError(jsonObject.optString("Error"));
+            if (jsonObject.has("Output"))
+                mRFIDModel.setOutput(jsonObject.optString("Output"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
