@@ -7,8 +7,6 @@ import java.io.Serializable;
  */
 
 public class VisitorModel extends Model implements Serializable {
-    private boolean IsError;
-    private String Message;
     private String visitorname;
     private String contactnumber;
     private String emailid;
@@ -16,14 +14,12 @@ public class VisitorModel extends Model implements Serializable {
     private String invitetype;
     private String invitenote;
     private String residentid;
-
-    public String getMessage() {
-        return Message;
-    }
-
-    public void setMessage(String Message) {
-        this.Message = Message;
-    }
+    private String residentname;
+    private String residentcontact1;
+    private String residentcontact2;
+    private String flat;
+    private String eventdate;
+    private String eventtime;
 
     public String getVisitorname() {
         return visitorname;
@@ -81,11 +77,51 @@ public class VisitorModel extends Model implements Serializable {
         this.residentid = residentid;
     }
 
-    public boolean isError() {
-        return IsError;
+    public String getResidentname() {
+        return residentname;
     }
 
-    public void setError(boolean error) {
-        IsError = error;
+    public void setResidentname(String residentname) {
+        this.residentname = residentname;
+    }
+
+    public String getResidentcontact1() {
+        return residentcontact1;
+    }
+
+    public void setResidentcontact1(String residentcontact1) {
+        this.residentcontact1 = residentcontact1;
+    }
+
+    public String getResidentcontact2() {
+        return residentcontact2;
+    }
+
+    public void setResidentcontact2(String residentcontact2) {
+        this.residentcontact2 = residentcontact2;
+    }
+
+    public String getFlat() {
+        return flat;
+    }
+
+    public void setFlat(String flat) {
+        this.flat = flat;
+    }
+
+    public String getEventdate() {
+        return eventdate;
+    }
+
+    public void setEventdate(String eventdate) {
+        this.eventdate = eventdate;
+    }
+
+    public String getEventtime() {
+        return eventtime;
+    }
+
+    public void setEventtime(String eventtime) {
+        this.eventtime = eventtime;
     }
 }

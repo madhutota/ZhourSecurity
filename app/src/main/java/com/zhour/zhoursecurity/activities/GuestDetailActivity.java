@@ -13,6 +13,7 @@ import com.zhour.zhoursecurity.Utils.Utility;
 import com.zhour.zhoursecurity.asynctask.IAsyncCaller;
 import com.zhour.zhoursecurity.asynctask.ServerJSONAsyncTask;
 import com.zhour.zhoursecurity.models.Model;
+import com.zhour.zhoursecurity.models.VisitorListModel;
 import com.zhour.zhoursecurity.models.VisitorModel;
 import com.zhour.zhoursecurity.parser.VisitorParser;
 
@@ -30,10 +31,25 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
     @BindView(R.id.btn_submit)
     Button btn_submit;
 
+    @BindView(R.id.enter_flat_number)
+    EditText enter_flat_number;
+
+    @BindView(R.id.enter_guest_name)
+    EditText enter_guest_name;
+
+    @BindView(R.id.enter_guest_contact)
+    EditText enter_guest_contact;
+
+    @BindView(R.id.enter_resident_name)
+    EditText enter_resident_name;
+
+    @BindView(R.id.enter_resident_contact)
+    EditText enter_resident_contact;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    private VisitorModel visitorModel;
+    private VisitorListModel visitorModel;
     private String mPurpose;
     private Intent intent;
 
@@ -72,7 +88,13 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
                 LinkedHashMap linkedHashMap = new LinkedHashMap();
 
                 linkedHashMap.put("communityid", "12"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
-                linkedHashMap.put("passcode", "716536");
+                //linkedHashMap.put("passcode", "716536");
+                linkedHashMap.put("passcode", "");
+                linkedHashMap.put("flatnumber", enter_flat_number.getText().toString());
+                linkedHashMap.put("guestname", enter_guest_name.getText().toString());
+                linkedHashMap.put("guestcontact", enter_guest_contact.getText().toString());
+                linkedHashMap.put("residentname", enter_resident_name.getText().toString());
+                linkedHashMap.put("residentcontact", enter_resident_contact.getText().toString());
 
                 VisitorParser visitorParser = new VisitorParser();
                 ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
@@ -105,11 +127,13 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
      */
     private boolean isValidDigitFields() {
         boolean isValid = true;
-        if (Utility.isValueNullOrEmpty(enter_pass_code.getText().toString())) {
-            Utility.setSnackBar(this, enter_pass_code, "Please write code");
-            isValid = false;
-        } else if (enter_pass_code.getText().toString().length() < 4) {
-            Utility.setSnackBar(this, enter_pass_code, "Code must be not less then 4 digits");
+        if (Utility.isValueNullOrEmpty(enter_pass_code.getText().toString()) &&
+                Utility.isValueNullOrEmpty(enter_guest_name.getText().toString()) &&
+                Utility.isValueNullOrEmpty(enter_guest_contact.getText().toString()) &&
+                Utility.isValueNullOrEmpty(enter_resident_name.getText().toString()) &&
+                Utility.isValueNullOrEmpty(enter_resident_contact.getText().toString()) &&
+                Utility.isValueNullOrEmpty(enter_flat_number.getText().toString())) {
+            Utility.setSnackBar(this, enter_pass_code, "Please enter data");
             isValid = false;
         }
         return isValid;
@@ -119,9 +143,9 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
     @Override
     public void onComplete(Model model) {
         if (model != null) {
-            if (model instanceof VisitorModel) {
-                visitorModel = (VisitorModel) model;
-                Intent detailsIntent = new Intent(GuestDetailActivity.this, DetailsActivity.class);
+            if (model instanceof VisitorListModel) {
+                visitorModel = (VisitorListModel) model;
+                Intent detailsIntent = new Intent(GuestDetailActivity.this, InviteSearchActivity.class);
                 detailsIntent.putExtra(Constants.VISITOR_MODEL, visitorModel);
                 startActivity(detailsIntent);
             }

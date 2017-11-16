@@ -46,6 +46,8 @@
     <string name="count">Count</string>
     <string name="event_type">Event Type</string>
     <string name="resident_name">Resident Name</string>
+    <string name="resident_details">Resident Details</string>
+    <string name="visitor_details">Visitor Details</string>
     <string name="vehicle_type">Vehicle Type</string>
     <string name="visitor_contact">Visitor Contact</string>
     <string name="visitor_name">Visitor Name</string>
@@ -64,5 +66,7 @@
 
     <string name="rfid_number">RFID Number</string>
     <string name="reading_rfid_data">Reading RFID Data</string>
+    <string name="invite_search">Invite Search</string>
+    <string name="guest_contact">Guest Contact</string>
 
 </resources>

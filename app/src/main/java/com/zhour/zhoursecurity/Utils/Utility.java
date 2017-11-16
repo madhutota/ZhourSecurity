@@ -41,7 +41,6 @@ public class Utility {
     private static final int CONNECTION_TIMEOUT = 25000;
 
 
-
     /**
      * ASSIGN THE COLOR
      **/
@@ -260,6 +259,12 @@ public class Utility {
     public static Typeface setRobotoRegular(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
     }
+
+    /*Get Font Awesome Web font Type face*/
+    public static Typeface setRobotoBold(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Bold.ttf");
+    }
+
     public static Typeface setLucidaSansItalic(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fonts/Lucida Sans Italic.ttf");
     }
@@ -320,4 +325,23 @@ public class Utility {
             task.execute(params);
         }
     }
+
+    public static String capitalizeFirstLetter(String s) {
+        if (s.length() == 0) return s;
+        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+    }
+
+    public static String getTime(String time) {
+        String timeSym = "";
+        if (time.endsWith(" PM"))
+            timeSym = " PM";
+        else
+            timeSym = " AM";
+
+        if (time.endsWith(":00 PM") || time.endsWith(":00 AM")) {
+            time = time.substring(0, time.length() - 6);
+        }
+        return time + "" + timeSym;
+    }
+
 }
