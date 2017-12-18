@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zhour.zhoursecurity.R;
 import com.zhour.zhoursecurity.Utils.APIConstants;
@@ -16,12 +18,11 @@ import com.zhour.zhoursecurity.models.Model;
 import com.zhour.zhoursecurity.models.RFIDModel;
 import com.zhour.zhoursecurity.parser.RFIDParser;
 
-import org.json.JSONArray;
-
 import java.util.LinkedHashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.supercharge.shimmerlayout.ShimmerLayout;
 
 /**
  * Created by shankar on 8/4/2017.
@@ -32,6 +33,19 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
     @BindView(R.id.et_id)
     EditText et_id;
 
+    @BindView(R.id.iv_maid)
+    ImageView iv_maid;
+
+    @BindView(R.id.tv_maid_name)
+    TextView tv_maid_name;
+
+    @BindView(R.id.tv_bar_code)
+    TextView tv_bar_code;
+
+    @BindView(R.id.shimmer_text)
+    ShimmerLayout shimmer_text;
+
+
     private String mPurpose;
     private Intent intent;
 
@@ -41,6 +55,10 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_scan);
         ButterKnife.bind(this);
+        shimmer_text.startShimmerAnimation();
+        setTypeFaces();
+
+
         intent = getIntent();
         if (intent.hasExtra(Constants.PURPOSE)) {
             mPurpose = intent.getStringExtra(Constants.PURPOSE);
@@ -49,20 +67,35 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
         et_id.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //  Utility.showLog("beforeTextChanged", "" + s);
 
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+              /*  Utility.showLog("onTextChanged", "" + s);
+                Toast.makeText(StaffScanActivity.this, "" + s, Toast.LENGTH_SHORT).show();*/
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 2)
+                Utility.showLog("afterTextChanged", "" + s);
+                if (s.length() > 2) {
+                    shimmer_text.stopShimmerAnimation();
+
+                    // Toast.makeText(StaffScanActivity.this, ""+s, Toast.LENGTH_SHORT).show();
                     sendDataToServer();
+                }
+
+
             }
         });
+    }
+
+    private void setTypeFaces() {
+        tv_bar_code.setTypeface(Utility.getFontAwesomeWebFont(this));
+        et_id.setTypeface(Utility.getFontAwesomeWebFont(this));
     }
 
     void sendDataToServer() {
@@ -117,8 +150,16 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
         if (model != null) {
             if (model instanceof RFIDModel) {
                 RFIDModel mRFIDModel = (RFIDModel) model;
-                Utility.showToastMessage(StaffScanActivity.this, "" + mRFIDModel.getOutput());
+                tv_maid_name.setText("Lakshmi");
+
+                // ImageLoaderLibrary.load(R.drawable.house_maid_new, iv_maid, this);
+
+                iv_maid.setImageDrawable(Utility.getDrawable(this, R.drawable.house_maid_new));
+
+
+                // Utility.showToastMessage(StaffScanActivity.this, "" + mRFIDModel.getOutput());
                 et_id.setText("");
+                shimmer_text.startShimmerAnimation();
             }
         }
     }

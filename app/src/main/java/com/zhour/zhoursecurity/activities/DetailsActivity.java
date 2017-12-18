@@ -28,7 +28,6 @@ import com.zhour.zhoursecurity.models.SuccessModel;
 import com.zhour.zhoursecurity.models.VisitorModel;
 import com.zhour.zhoursecurity.parser.LookUpVehicleTypeParser;
 import com.zhour.zhoursecurity.parser.SuccessParser;
-import com.zhour.zhoursecurity.parser.VisitorParser;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

@@ -23,8 +23,8 @@ public class GuestAndStaffActivity extends BaseActivity {
     @BindView(R.id.ll_guest)
     LinearLayout ll_guest;
 
-    @BindView(R.id.tv_guest)
-    TextView tv_guest;
+    @BindView(R.id.tv_visitors)
+    TextView tv_visitors;
 
     @BindView(R.id.tv_staff)
     TextView tv_staff;
@@ -44,12 +44,24 @@ public class GuestAndStaffActivity extends BaseActivity {
     }
 
     private void setTypeface() {
-        tv_guest.setTypeface(Utility.getFontAwesomeWebFont(this));
+        tv_visitors.setTypeface(Utility.getFontAwesomeWebFont(this));
         tv_staff.setTypeface(Utility.getFontAwesomeWebFont(this));
 
         intent = getIntent();
         if (intent.hasExtra(Constants.PURPOSE)) {
             mPurpose = intent.getStringExtra(Constants.PURPOSE);
+        }
+
+        if (mPurpose.equalsIgnoreCase(Constants.IN)) {
+            tv_staff.setText("staff - In");
+            tv_visitors.setText("Visitors - In");
+
+        } else {
+            tv_staff.setText("staff - Out");
+            tv_visitors.setText("Visitors - Out");
+            ll_guest.setClickable(false);
+
+
         }
     }
 
@@ -73,4 +85,6 @@ public class GuestAndStaffActivity extends BaseActivity {
         intent.putExtra(Constants.PURPOSE, mPurpose);
         startActivity(intent);
     }
+
+
 }

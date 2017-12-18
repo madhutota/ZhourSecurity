@@ -3,6 +3,7 @@ package com.zhour.zhoursecurity.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhour.zhoursecurity.R;
@@ -15,12 +16,18 @@ import butterknife.OnClick;
 
 public class DashboardActivity extends BaseActivity {
 
-    @BindView(R.id.tv_in)
-    TextView tv_in;
-    @BindView(R.id.tv_out)
-    TextView tv_out;
-    @BindView(R.id.tv_emergency)
-    TextView tv_emergency;
+    @BindView(R.id.ll_move_in)
+    LinearLayout ll_move_in;
+
+    @BindView(R.id.ll_move_out)
+    LinearLayout ll_move_out;
+
+    @BindView(R.id.tv_move_in)
+    TextView tv_move_in;
+
+    @BindView(R.id.tv_move_out)
+    TextView tv_move_out;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -33,28 +40,23 @@ public class DashboardActivity extends BaseActivity {
     }
 
     private void initUi() {
-        tv_in.setTypeface(Utility.setRobotoRegular(this));
-        tv_out.setTypeface(Utility.setRobotoRegular(this));
-        tv_emergency.setTypeface(Utility.setRobotoRegular(this));
+        tv_move_in.setTypeface(Utility.setRobotoRegular(this));
+        tv_move_out.setTypeface(Utility.setRobotoRegular(this));
+
     }
 
-    @OnClick(R.id.tv_in)
+    @OnClick(R.id.ll_move_in)
     void navigateIn() {
         Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
         intent.putExtra(Constants.PURPOSE, Constants.IN);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_out)
+    @OnClick(R.id.ll_move_out)
     void navigateOut() {
         Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
         intent.putExtra(Constants.PURPOSE, Constants.OUT);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_emergency)
-    void navigateEmergency() {
-        /*Intent intent = new Intent(getApplicationContext(), GuestAndStaffActivity.class);
-        startActivity(intent);*/
-    }
 }

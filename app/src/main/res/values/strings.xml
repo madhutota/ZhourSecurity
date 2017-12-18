@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ZhourSecurity</string>
+    <string name="app_name">ZOHR-GATE</string>
     <string name="txt_cd" />
 
 
@@ -68,5 +68,24 @@
     <string name="reading_rfid_data">Reading RFID Data</string>
     <string name="invite_search">Invite Search</string>
     <string name="guest_contact">Guest Contact</string>
+    <string name="visitors">VISITORS</string>
+
+
+    //icons
+
+    <string name="flat_icon">&#xf1ad;</string>
+    <string name="lock_icon">&#xf084;</string>
+    <string name="user_icon">&#xf007;</string>
+    <string name="phone_icon">&#xf098;</string>
+    <string name="camera_icon">&#xf030;</string>
+    <string name="barcode_icon">&#xf02a;</string>
+
+    <string name="flat_number_new">Flat Number</string>
+    <string name="resident_ph_no">Resident Ph no</string>
+    <string name="guest_ph_no">Guest Ph no</string>
+    <string name="guent_name">Guent Name</string>
+    <string name="password">Password</string>
+    <string name="swipe_your_card_here">Swipe Your Card Here</string>
+
 
 </resources>

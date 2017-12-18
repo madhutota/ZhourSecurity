@@ -42,15 +42,33 @@
                 android:layout_marginTop="@dimen/_5dp"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/et_visitor_name"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40dp"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/visitor_name"
-                    android:inputType="textCapSentences"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_visitor_icon"
+                        android:layout_width="@dimen/_40dp"
+                        android:layout_height="@dimen/_40dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_2dp"
+                        android:gravity="center" />
+
+                    <EditText
+                        android:id="@+id/et_visitor_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40dp"
+                        android:layout_margin="@dimen/_2dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/visitor_name"
+                        android:inputType="textCapSentences"
+                        android:padding="@dimen/_2dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+
+                </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
@@ -120,7 +138,8 @@
                 android:layout_marginEnd="@dimen/_30dp"
                 android:layout_marginStart="@dimen/_30dp"
                 android:layout_marginTop="@dimen/_5dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/et_resident_name"
@@ -146,7 +165,8 @@
                 android:layout_marginEnd="@dimen/_30dp"
                 android:layout_marginStart="@dimen/_30dp"
                 android:layout_marginTop="@dimen/_5dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/et_event_type"
@@ -156,7 +176,8 @@
                     android:focusable="false"
                     android:hint="@string/event_type"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
+                    android:textSize="@dimen/_16sp"
+                    android:visibility="gone" />
 
                 <View
                     android:layout_width="match_parent"
@@ -172,7 +193,8 @@
                 android:layout_marginEnd="@dimen/_30dp"
                 android:layout_marginStart="@dimen/_30dp"
                 android:layout_marginTop="@dimen/_5dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/et_count"
@@ -199,7 +221,8 @@
                 android:layout_marginEnd="@dimen/_30dp"
                 android:layout_marginStart="@dimen/_30dp"
                 android:layout_marginTop="@dimen/_5dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/et_email"
@@ -216,7 +239,8 @@
                     android:layout_height="@dimen/_1dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_7dp"
-                    android:background="@color/colorPrimary" />
+                    android:background="@color/colorPrimary"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
@@ -250,7 +274,8 @@
                 android:layout_marginEnd="@dimen/_30dp"
                 android:layout_marginStart="@dimen/_30dp"
                 android:layout_marginTop="@dimen/_5dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/et_resident_contact"
@@ -281,7 +306,7 @@
         android:layout_marginBottom="@dimen/_10dp"
         android:layout_marginEnd="@dimen/_10dp"
         android:layout_marginStart="@dimen/_10dp"
-        android:background="@drawable/rectangel_drawble"
+        android:background="@drawable/drawble_button"
         android:text="@string/submit"
         android:textColor="@color/white"
         android:textSize="@dimen/_20sp" />

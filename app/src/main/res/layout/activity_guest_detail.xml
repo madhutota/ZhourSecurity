@@ -22,242 +22,215 @@
             android:src="@drawable/logo" />
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v4.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_invite_event"
+        android:orientation="vertical">
 
-
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginStart="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_40dp"
-                android:background="@drawable/drawable_white_solid_et_bg"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/_3dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
 
                 <LinearLayout
-                    android:layout_width="@dimen/_50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10dp"
+                    android:id="@+id/ll_flat_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50dp"
+                    android:layout_marginEnd="@dimen/_10dp"
                     android:layout_marginStart="@dimen/_10dp"
-                    android:orientation="vertical">
+                    android:layout_marginTop="@dimen/_40dp"
+                    android:background="@drawable/edit_box_icon"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/_3dp">
 
-                    <ImageView
-                        android:layout_width="@dimen/_50dp"
+                    <TextView
+                        android:id="@+id/tv_flat"
+                        android:layout_width="@dimen/_40dp"
                         android:layout_height="@dimen/_40dp"
-                        android:src="@drawable/abc_big" />
-
-                    <View
-                        android:layout_width="@dimen/_47dp"
-                        android:layout_height="@dimen/_1dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_7dp"
-                        android:background="@color/colorPrimary" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="@dimen/_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_30dp"
-                    android:layout_marginStart="@dimen/_30dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/enter_pass_code"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40dp"
-                        android:background="@android:color/transparent"
-                        android:gravity="center_vertical"
-                        android:hint="@string/enter_pass_code"
-                        android:inputType="number"
-                        android:maxLength="8"
-                        android:textColor="@color/black"
+                        android:layout_marginLeft="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:gravity="center"
+                        android:text="@string/flat_icon"
                         android:textSize="@dimen/_16sp" />
 
-                    <View
+                    <EditText
+                        android:id="@+id/et_flat_no"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_7dp"
-                        android:background="@color/colorPrimary" />
+                        android:layout_marginEnd="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/flat_number"
+                        android:lines="1" />
+
+
                 </LinearLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_41dp"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginStart="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:background="@drawable/drawable_white_solid_et_bg"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/enter_guest_name"
+                <LinearLayout
+                    android:id="@+id/ll_guest"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40dp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center_vertical"
-                    android:hint="@string/guest_name"
-                    android:inputType="text"
-                    android:paddingEnd="@dimen/_20dp"
-                    android:paddingStart="@dimen/_20dp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
+                    android:layout_height="@dimen/_50dp"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:background="@drawable/edit_box_icon"
+                    android:orientation="horizontal">
 
-                <View
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="@dimen/_40dp"
+                        android:layout_height="@dimen/_40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:gravity="center"
+                        android:text="@string/phone_icon"
+                        android:textSize="@dimen/_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_guest_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/guest_ph_no"
+                        android:inputType="phone"
+                        android:maxLength="12" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1dp"
+                    android:layout_height="@dimen/_50dp"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:background="@drawable/edit_box_icon"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_resident_phno"
+                        android:layout_width="@dimen/_40dp"
+                        android:layout_height="@dimen/_40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:gravity="center"
+                        android:text="@string/phone_icon"
+                        android:textSize="@dimen/_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_resident_number"
+                        android:layout_width="275dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/resident_ph_no"
+                        android:inputType="phone"
+                        android:maxLength="12" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50dp"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:background="@drawable/edit_box_icon"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_user_guest"
+                        android:layout_width="@dimen/_40dp"
+                        android:layout_height="@dimen/_40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:gravity="center"
+                        android:text="@string/user_icon"
+                        android:textSize="@dimen/_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_guest_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/guent_name"
+                        android:inputType="text" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50dp"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:background="@drawable/edit_box_icon"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_pass_icon"
+                        android:layout_width="@dimen/_40dp"
+                        android:layout_height="@dimen/_40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:gravity="center"
+                        android:text="@string/lock_icon"
+                        android:textSize="@dimen/_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_15dp"
+                        android:layout_marginStart="@dimen/_15dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/password"
+                        android:inputType="text" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_50dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_7dp"
-                    android:background="@color/colorPrimary" />
+                    android:layout_marginEnd="@dimen/_25dp"
+                    android:layout_marginStart="@dimen/_25dp"
+                    android:layout_marginTop="@dimen/_30dp"
+                    android:background="@drawable/submit_icon"
+                    android:gravity="center"
+                    android:text="@string/txt_get_details"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_41dp"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginStart="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:background="@drawable/drawable_white_solid_et_bg"
-                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/enter_guest_contact"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40dp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center_vertical"
-                    android:hint="@string/guest_contact"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:paddingEnd="@dimen/_20dp"
-                    android:paddingStart="@dimen/_20dp"
-                    android:text="9160883232"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
+        </android.support.v4.widget.NestedScrollView>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_7dp"
-                    android:background="@color/colorPrimary" />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_41dp"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginStart="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:background="@drawable/drawable_white_solid_et_bg"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/enter_resident_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40dp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center_vertical"
-                    android:hint="@string/resident_name"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:paddingEnd="@dimen/_20dp"
-                    android:paddingStart="@dimen/_20dp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_7dp"
-                    android:background="@color/colorPrimary" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_41dp"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginStart="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:background="@drawable/drawable_white_solid_et_bg"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/enter_resident_contact"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40dp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center_vertical"
-                    android:hint="@string/resident_contact"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:paddingEnd="@dimen/_20dp"
-                    android:paddingStart="@dimen/_20dp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_7dp"
-                    android:background="@color/colorPrimary" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_41dp"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginStart="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:background="@drawable/drawable_white_solid_et_bg"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/enter_flat_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40dp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center_vertical"
-                    android:hint="@string/flat_number"
-                    android:inputType="number"
-                    android:maxLength="7"
-                    android:paddingEnd="@dimen/_20dp"
-                    android:paddingStart="@dimen/_20dp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_7dp"
-                    android:background="@color/colorPrimary" />
-            </LinearLayout>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50dp"
-        android:layout_margin="@dimen/_10dp"
-        android:background="@drawable/rectangel_drawble"
-        android:text="@string/txt_get_details"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20sp" />
+    </RelativeLayout>
 
 
 </LinearLayout>

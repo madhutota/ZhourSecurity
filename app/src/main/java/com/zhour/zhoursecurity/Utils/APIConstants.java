@@ -15,7 +15,9 @@ public class APIConstants {
 
     public static String ERROR_MESSAGE = "We could not process your request at this time. Please try again later.";
 
-    public static String BASE_URL = "http://139.59.30.4:3500/api/v1.0/";
+    // public static String BASE_URL = "http://139.59.30.4:3500/api/v1.0/";
+
+    public static String BASE_URL = "http://139.59.30.4/api/v1.0/";
     //public static String BASE_URL = "http://icuepro.com/api/v1.0/";
 
     public static String AUTHENTICATE_USER = BASE_URL + "authenticateUser";

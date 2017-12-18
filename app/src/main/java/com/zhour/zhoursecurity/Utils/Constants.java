@@ -26,11 +26,22 @@ public class Constants {
     public static final String COMMUNITY_NAME = "COMMUNITY_NAME";
     public static final String RESIDENT_ID = "RESIDENT_ID";
 
+    public static final String CAR_NUMBER = "CAR_NUMBER";
+
     public static final String VISITOR_MODEL = "VISITOR_MODEL";
+    public static final String LOOKUPVEHICLETYPEMODEL = "LOOKUPVEHICLETYPEMODEL";
 
     public static final String PURPOSE = "PURPOSE";
     public static final String OUT = "OUT";
     public static final String IN = "IN";
+    public static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 200;
+    public static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 203;
+
+
+
+    public static final int PHOTO_REQUEST = 102;
+    public static final String SAVED_INSTANCE_URI = "uri";
+    public static final String SAVED_INSTANCE_RESULT = "result";
 
 
 }

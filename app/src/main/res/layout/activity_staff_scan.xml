@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_gray">
-
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -20,42 +20,92 @@
             android:src="@drawable/logo" />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/iv_maid"
+        android:layout_width="@dimen/_200dp"
+        android:layout_height="@dimen/_200dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_50dp" />
+
+    <TextView
+        android:id="@+id/tv_maid_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_maid"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_15dp"
+        android:layout_marginTop="@dimen/_25dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_25sp" />
+
+    <io.supercharge.shimmerlayout.ShimmerLayout
+        android:id="@+id/shimmer_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        app:shimmer_animation_duration="1200">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/reading_rfid_data"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/_18sp" />
-
-        <EditText
-            android:id="@+id/et_id"
+        <LinearLayout
+            android:id="@+id/ll_scanner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10dp"
-            android:layout_marginStart="@dimen/_10dp"
-            android:layout_marginTop="@dimen/_10dp"
-            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/_15dp"
             android:gravity="center"
-            android:hint="@string/rfid_number"
-            android:inputType="textPassword"
-            android:minHeight="@dimen/_45dp"
-            android:textSize="@dimen/_18sp" />
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/_10dp"
-            android:layout_marginStart="@dimen/_10dp"
-            android:layout_marginTop="@dimen/_5dp"
-            android:background="@color/colorPrimary" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/tv_bar_code"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:minHeight="@dimen/_45dp"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/barcode_icon"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20sp" />
+
+                <EditText
+                    android:id="@+id/et_id"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:layout_weight="0.7"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:hint="@string/swipe_your_card_here"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:minHeight="@dimen/_45dp"
+                    android:textSize="@dimen/_18sp" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_15dp"
+                android:layout_marginEnd="@dimen/_10dp"
+                android:layout_marginStart="@dimen/_10dp"
+                android:layout_marginTop="@dimen/_5dp"
+                android:background="@color/colorPrimary" />
+        </LinearLayout>
+    </io.supercharge.shimmerlayout.ShimmerLayout>
 </RelativeLayout>

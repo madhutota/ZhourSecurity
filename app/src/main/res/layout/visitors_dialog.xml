@@ -1,0 +1,140 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="@dimen/_20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="1"
+        android:background="@drawable/ic_invite_event">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/btn_alien"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40dp"
+            android:layout_margin="@dimen/_15dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:elevation="@dimen/_10dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:contentDescription="@string/txt_cd"
+                android:text="Visiter Car Entry"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+
+        <ImageView
+            android:id="@+id/ic_alien"
+            android:layout_width="@dimen/_200dp"
+            android:layout_height="@dimen/_230dp"
+            android:layout_below="@+id/btn_alien"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:padding="@dimen/_10dp"
+            android:src="@drawable/ic_alien_car" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_alien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_get_details"
+            android:layout_marginTop="@dimen/_15dp"
+            android:layout_marginBottom="@dimen/_15dp"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="@dimen/_50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_50dp"
+                    android:layout_height="@dimen/_40dp"
+                    android:src="@drawable/abc_big" />
+
+                <View
+                    android:layout_width="@dimen/_47dp"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_7dp"
+                    android:background="@color/colorPrimary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_30dp"
+                android:layout_marginStart="@dimen/_30dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/et_vehicle_number"
+                        android:layout_width="@dimen/_0dp"
+                        android:layout_height="@dimen/_40dp"
+                        android:layout_weight="0.9"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/enter_vehicle_number"
+                        android:lines="1"
+                        android:maxLength="20"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_scanner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:padding="@dimen/_3dp"
+                        android:text="@string/camera_icon"
+                        android:textSize="@dimen/_18sp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_7dp"
+                    android:background="@color/colorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_get_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_20dp"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_10dp"
+            android:background="@drawable/submit_icon"
+            android:gravity="center"
+            android:text="@string/txt_get_details"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_18sp" />
+
+    </RelativeLayout>
+</RelativeLayout>

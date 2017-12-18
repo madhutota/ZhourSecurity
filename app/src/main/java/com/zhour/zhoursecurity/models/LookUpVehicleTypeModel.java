@@ -1,12 +1,13 @@
 package com.zhour.zhoursecurity.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by shankar on 7/17/2017.
  */
 
-public class LookUpVehicleTypeModel extends Model {
+public class LookUpVehicleTypeModel extends Model implements Serializable {
     private boolean IsError;
     private String Message;
     private String Output;
