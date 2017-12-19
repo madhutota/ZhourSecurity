@@ -35,6 +35,7 @@ import com.zhour.zhoursecurity.Utils.Constants;
 import com.zhour.zhoursecurity.Utils.Utility;
 import com.zhour.zhoursecurity.asynctask.IAsyncCaller;
 import com.zhour.zhoursecurity.asynctask.ServerJSONAsyncTask;
+import com.zhour.zhoursecurity.aynctaskold.ServerIntractorAsync;
 import com.zhour.zhoursecurity.models.Model;
 import com.zhour.zhoursecurity.models.VisitorListModel;
 import com.zhour.zhoursecurity.parser.VisitorParser;
@@ -235,7 +236,7 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
                 linkedHashMap.put("residentcontact", "0" /*et_resident_number.getText().toString()*/);
 
                 VisitorParser visitorParser = new VisitorParser();
-                ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
+                ServerIntractorAsync serverJSONAsyncTask = new ServerIntractorAsync(
                         this, Utility.getResourcesString(this, R.string.please_wait), true,
                         APIConstants.GET_INVITE_INFO, linkedHashMap,
                         APIConstants.REQUEST_TYPE.POST, this, visitorParser);
