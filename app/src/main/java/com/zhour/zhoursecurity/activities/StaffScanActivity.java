@@ -11,12 +11,19 @@ import android.widget.TextView;
 import com.zhour.zhoursecurity.R;
 import com.zhour.zhoursecurity.Utils.APIConstants;
 import com.zhour.zhoursecurity.Utils.Constants;
+import com.zhour.zhoursecurity.Utils.UImageLoader;
 import com.zhour.zhoursecurity.Utils.Utility;
 import com.zhour.zhoursecurity.asynctask.IAsyncCaller;
 import com.zhour.zhoursecurity.asynctask.ServerJSONAsyncTask;
+import com.zhour.zhoursecurity.aynctaskold.ServerIntractorAsync;
+import com.zhour.zhoursecurity.db.DatabaseHandler;
+import com.zhour.zhoursecurity.db.StaffDataSource;
 import com.zhour.zhoursecurity.models.Model;
 import com.zhour.zhoursecurity.models.RFIDModel;
+import com.zhour.zhoursecurity.models.StaffDetailsInfoModel;
+import com.zhour.zhoursecurity.models.StaffDetailsModel;
 import com.zhour.zhoursecurity.parser.RFIDParser;
+import com.zhour.zhoursecurity.parser.StaffDeatilParser;
 
 import java.util.LinkedHashMap;
 
@@ -48,6 +55,7 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
 
     private String mPurpose;
     private Intent intent;
+    private StaffDataSource staffDataSource;
 
 
     @Override
@@ -55,6 +63,10 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_scan);
         ButterKnife.bind(this);
+
+        DatabaseHandler.getInstance(this);
+        staffDataSource = new StaffDataSource(this);
+
         shimmer_text.startShimmerAnimation();
         setTypeFaces();
 
@@ -81,7 +93,7 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
             @Override
             public void afterTextChanged(Editable s) {
                 Utility.showLog("afterTextChanged", "" + s);
-                if (s.length() > 2) {
+                if (s.length() > 9) {
                     shimmer_text.stopShimmerAnimation();
 
                     // Toast.makeText(StaffScanActivity.this, ""+s, Toast.LENGTH_SHORT).show();
@@ -120,9 +132,10 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
                     //linkedHashMap.put("staffid", et_id.getText().toString());
                     linkedHashMap.put("staffid", "1");
                     linkedHashMap.put("communityid", "12");
+                    linkedHashMap.put("dttm", Utility.getDate());
                     //linkedHashMap.put("communityid", Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID));
                     RFIDParser rfidParser = new RFIDParser();
-                    ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
+                    ServerIntractorAsync serverJSONAsyncTask = new ServerIntractorAsync(
                             this, Utility.getResourcesString(this, R.string.please_wait), true,
                             APIConstants.CREATE_OR_UPDATE_STAFF_VISIT, linkedHashMap,
                             APIConstants.REQUEST_TYPE.POST, this, rfidParser);
@@ -150,17 +163,58 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
         if (model != null) {
             if (model instanceof RFIDModel) {
                 RFIDModel mRFIDModel = (RFIDModel) model;
-                tv_maid_name.setText("Lakshmi");
-
-                // ImageLoaderLibrary.load(R.drawable.house_maid_new, iv_maid, this);
-
-                iv_maid.setImageDrawable(Utility.getDrawable(this, R.drawable.house_maid_new));
-
-
-                // Utility.showToastMessage(StaffScanActivity.this, "" + mRFIDModel.getOutput());
-                et_id.setText("");
-                shimmer_text.startShimmerAnimation();
+                if (!mRFIDModel.getIsError()) {
+                    //StaffDetailsModel staffDetailsModel = staffDataSource.getStaffDetails(et_id.getText().toString());
+                    StaffDetailsModel staffDetailsModel = staffDataSource.getStaffDetails("123");
+                    if (Utility.isValueNullOrEmpty(staffDetailsModel.getRfid())) {
+                        getStaffInfo();
+                    } else {
+                        et_id.setText("");
+                        displayData(staffDetailsModel);
+                    }
+                }
+            } else if (model instanceof StaffDetailsInfoModel) {
+                StaffDetailsInfoModel staffDetailsInfoModel = (StaffDetailsInfoModel) model;
+                if (!staffDetailsInfoModel.isError()) {
+                    StaffDetailsModel staffDetailsModel = staffDetailsInfoModel.getStaffDetailsModel();
+                    //staffDetailsModel.setRfid(et_id.getText().toString());
+                    staffDetailsModel.setRfid("123");
+                    //staffDetailsModel.setCommunity_id(Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID));
+                    staffDetailsModel.setCommunity_id("12");
+                    staffDataSource.insertData(staffDetailsModel);
+                    displayData(staffDetailsModel);
+                    et_id.setText("");
+                }
             }
+        }
+    }
+
+    /**
+     * This method is used to display staff details
+     */
+    private void displayData(StaffDetailsModel staffDetailsModel) {
+        tv_maid_name.setText(staffDetailsModel.getStaff_name());
+        //iv_maid.setImageDrawable(Utility.getDrawable(this, R.drawable.house_maid_new));
+        UImageLoader.URLpicLoading(iv_maid, APIConstants.BASE_URL + staffDetailsModel.getPhoto(), null, R.drawable.logo);
+    }
+
+    /**
+     * This method is used to get the staff info
+     */
+    private void getStaffInfo() {
+        try {
+            LinkedHashMap linkedHashMap = new LinkedHashMap();
+            linkedHashMap.put("communityid", "12");
+            linkedHashMap.put("staffid", "123");
+            //linkedHashMap.put("communityid", Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID));
+            StaffDeatilParser staffDeatilParser = new StaffDeatilParser();
+            ServerIntractorAsync serverJSONAsyncTask = new ServerIntractorAsync(
+                    this, Utility.getResourcesString(this, R.string.please_wait), true,
+                    APIConstants.GET_COMMUNITY_STAFF_INFO, linkedHashMap,
+                    APIConstants.REQUEST_TYPE.POST, this, staffDeatilParser);
+            Utility.execute(serverJSONAsyncTask);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

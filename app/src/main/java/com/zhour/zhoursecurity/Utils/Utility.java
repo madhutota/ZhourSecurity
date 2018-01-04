@@ -55,6 +55,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -497,5 +499,12 @@ public class Utility {
         fragmentTransaction.replace(R.id.content_frame, fragment, tag);
         fragmentTransaction.addToBackStack(tag);
         fragmentTransaction.commit();
+    }
+
+    public static String getDate() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+        String formattedDate = df.format(c.getTime());
+        return formattedDate;
     }
 }
