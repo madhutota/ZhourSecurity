@@ -87,5 +87,9 @@
     <string name="password">Password</string>
     <string name="swipe_your_card_here">Swipe Your Card Here</string>
 
+    <string name="home">Home</string>
+    <string name="about_us">About us</string>
+    <string name="logout">Logout</string>
 
+    <string name="empty">empty</string>
 </resources>

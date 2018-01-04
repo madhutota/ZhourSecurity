@@ -21,4 +21,11 @@
     <color name="light_green">#20AF89</color>
 
     <color name="background_gray">#EAEAEA</color>
+
+
+    <color name="yello_light">#E5CF00</color>
+    <color name="yello_text">#CBB800</color>
+    <color name="colorWhite">@android:color/white</color>
+    <color name="btnDefaultColor">#000000</color>
+
 </resources>
