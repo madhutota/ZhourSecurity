@@ -27,6 +27,7 @@ import com.zhour.zhoursecurity.Utils.Utility;
 import com.zhour.zhoursecurity.activities.InviteSearchActivity;
 import com.zhour.zhoursecurity.asynctask.IAsyncCaller;
 import com.zhour.zhoursecurity.asynctask.ServerJSONAsyncTask;
+import com.zhour.zhoursecurity.aynctaskold.ServerIntractorAsync;
 import com.zhour.zhoursecurity.interfaces.IupdateScanText;
 import com.zhour.zhoursecurity.models.LookUpVehicleTypeModel;
 import com.zhour.zhoursecurity.models.Model;
@@ -117,7 +118,7 @@ public class InviteSearchExpandableAdapter extends BaseExpandableListAdapter imp
             LayoutInflater layoutInflater = (LayoutInflater) this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             convertView = layoutInflater.inflate(R.layout.list_group, null);
-            getVehicleTypes("Vehicle%20Types");
+            getVehicleTypes("Vehicle Types");
 
         }
         TextView textgrp = convertView.findViewById(R.id.lblListHeader);
@@ -204,10 +205,10 @@ public class InviteSearchExpandableAdapter extends BaseExpandableListAdapter imp
                         linkedHashMap.put("vehiclenumber", "AP29AG7410");
                         linkedHashMap.put("eventtypeid", visitorModel.getInvitetypeid());
                         linkedHashMap.put("residentid", visitorModel.getResidentid());
-                        linkedHashMap.put("communityid", "2"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
+                        linkedHashMap.put("communityid", "12"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);
 
                         SuccessParser successParser = new SuccessParser();
-                        ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(ctx, Utility.getResourcesString(ctx, R.string.please_wait), true,
+                        ServerIntractorAsync serverJSONAsyncTask = new ServerIntractorAsync(ctx, Utility.getResourcesString(ctx, R.string.please_wait), true,
                                 APIConstants.CREATE_OR_UPDATE_VISITOR, linkedHashMap,
                                 APIConstants.REQUEST_TYPE.POST, InviteSearchExpandableAdapter.this, successParser);
                         Utility.execute(serverJSONAsyncTask);
@@ -270,7 +271,7 @@ public class InviteSearchExpandableAdapter extends BaseExpandableListAdapter imp
             LinkedHashMap linkedHashMap = new LinkedHashMap();
             linkedHashMap.put("entityname", invite_types);
             LookUpVehicleTypeParser mLookUpVehicleTypeParser = new LookUpVehicleTypeParser();
-            ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
+            ServerIntractorAsync serverJSONAsyncTask = new ServerIntractorAsync(
                     ctx, Utility.getResourcesString(this.ctx, R.string.please_wait), true,
                     APIConstants.GET_LOOKUP_DATA_BY_ENTITY_NAME, linkedHashMap,
                     APIConstants.REQUEST_TYPE.POST, this, mLookUpVehicleTypeParser);
@@ -309,6 +310,7 @@ public class InviteSearchExpandableAdapter extends BaseExpandableListAdapter imp
         return isTrue;
 
     }
+
     /**
      * This method is used to get the vehicle type id
      */
