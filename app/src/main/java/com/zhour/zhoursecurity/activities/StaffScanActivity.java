@@ -195,7 +195,7 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
     private void displayData(StaffDetailsModel staffDetailsModel) {
         tv_maid_name.setText(staffDetailsModel.getStaff_name());
         //iv_maid.setImageDrawable(Utility.getDrawable(this, R.drawable.house_maid_new));
-        UImageLoader.URLpicLoading(iv_maid, APIConstants.BASE_URL + staffDetailsModel.getPhoto(), null, R.drawable.logo);
+        UImageLoader.URLpicLoading(iv_maid, APIConstants.HOME_URL + staffDetailsModel.getPhoto(), null, R.drawable.logo);
     }
 
     /**
