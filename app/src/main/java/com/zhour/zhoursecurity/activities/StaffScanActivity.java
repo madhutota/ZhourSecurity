@@ -115,7 +115,7 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
             if (mPurpose.equalsIgnoreCase(Constants.OUT)) {
                 try {
                     LinkedHashMap linkedHashMap = new LinkedHashMap();
-                    linkedHashMap.put("staffid", "1");
+                    linkedHashMap.put("staffid", "123");
                     RFIDParser rfidParser = new RFIDParser();
                     ServerJSONAsyncTask serverJSONAsyncTask = new ServerJSONAsyncTask(
                             this, Utility.getResourcesString(this, R.string.please_wait), true,
@@ -130,9 +130,9 @@ public class StaffScanActivity extends BaseActivity implements IAsyncCaller {
                     LinkedHashMap linkedHashMap = new LinkedHashMap();
                     linkedHashMap.put("visitid", "0");
                     //linkedHashMap.put("staffid", et_id.getText().toString());
-                    linkedHashMap.put("staffid", "1");
+                    linkedHashMap.put("staffid", "123");
                     linkedHashMap.put("communityid", "12");
-                    linkedHashMap.put("dttm", Utility.getDate());
+                    linkedHashMap.put("dttm", Utility.getDatenew());
                     //linkedHashMap.put("communityid", Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID));
                     RFIDParser rfidParser = new RFIDParser();
                     ServerIntractorAsync serverJSONAsyncTask = new ServerIntractorAsync(

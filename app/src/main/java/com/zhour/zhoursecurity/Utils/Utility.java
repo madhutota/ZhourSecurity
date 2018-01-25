@@ -507,4 +507,11 @@ public class Utility {
         String formattedDate = df.format(c.getTime());
         return formattedDate;
     }
+
+    public static String getDatenew() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        String formattedDate = df.format(c.getTime());
+        return formattedDate;
+    }
 }
