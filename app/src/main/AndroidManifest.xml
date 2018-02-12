@@ -58,7 +58,7 @@
         </provider>
 
         <activity
-            android:name=".activities.InviteSearchActivity"
+            android:name=".activities.InviteSearchNewActivity"
             android:screenOrientation="portrait" />
 
 

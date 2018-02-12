@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40dp"
                     android:background="@android:color/transparent"
-                    android:focusable="false"
+                    android:digits="0123456789"
                     android:hint="@string/visitor_contact"
                     android:inputType="number"
                     android:maxLength="10"

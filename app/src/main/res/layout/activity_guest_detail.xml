@@ -69,6 +69,7 @@
                         android:layout_marginStart="@dimen/_15dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/flat_number"
+                        android:inputType="number"
                         android:lines="1" />
 
 

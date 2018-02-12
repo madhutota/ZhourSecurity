@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zhour.zhoursecurity.R;
 import com.zhour.zhoursecurity.Utils.APIConstants;
@@ -26,7 +24,6 @@ import com.zhour.zhoursecurity.Utils.Constants;
 import com.zhour.zhoursecurity.Utils.Utility;
 import com.zhour.zhoursecurity.activities.InviteSearchActivity;
 import com.zhour.zhoursecurity.asynctask.IAsyncCaller;
-import com.zhour.zhoursecurity.asynctask.ServerJSONAsyncTask;
 import com.zhour.zhoursecurity.aynctaskold.ServerIntractorAsync;
 import com.zhour.zhoursecurity.interfaces.IupdateScanText;
 import com.zhour.zhoursecurity.models.LookUpVehicleTypeModel;
@@ -139,7 +136,7 @@ public class InviteSearchExpandableAdapter extends BaseExpandableListAdapter imp
         final EditText et_visitor_contact = view.findViewById(R.id.et_visitor_contact);
         et_visitor_contact.setTag(view);
         et_visitor_contact.setTypeface(Utility.setRobotoRegular(ctx));
-        et_visitor_contact.setText(visitorModel.getContactnumber());
+        //et_visitor_contact.setText(visitorModel.getContactnumber());
 
         final EditText et_vehicle_type = view.findViewById(R.id.et_vehicle_type);
         et_vehicle_type.setTag(view);
@@ -148,10 +145,8 @@ public class InviteSearchExpandableAdapter extends BaseExpandableListAdapter imp
         et_vehicle_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 showSpinnerDialog(ctx, Utility.getResourcesString(ctx, R.string.vehicle_type),
                         lookUpVehicleTypeModel.getLookupNames(), 2, et_vehicle_type);
-
             }
         });
 

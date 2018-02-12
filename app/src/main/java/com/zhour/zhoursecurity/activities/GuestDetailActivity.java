@@ -233,7 +233,7 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
                 linkedHashMap.put("guestname", "-" /*et_guest_name.getText().toString()*/);
                 linkedHashMap.put("guestcontact", "0" /*et_guest_no.getText().toString()*/);
                 linkedHashMap.put("residentname", "-");
-                linkedHashMap.put("residentcontact", "0" /*et_resident_number.getText().toString()*/);
+                linkedHashMap.put("residentcontact", "9014332627" /*et_resident_number.getText().toString()*/);
 
                 VisitorParser visitorParser = new VisitorParser();
                 ServerIntractorAsync serverJSONAsyncTask = new ServerIntractorAsync(
@@ -283,7 +283,7 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
         if (model != null) {
             if (model instanceof VisitorListModel) {
                 visitorModel = (VisitorListModel) model;
-                Intent detailsIntent = new Intent(GuestDetailActivity.this, InviteSearchActivity.class);
+                Intent detailsIntent = new Intent(GuestDetailActivity.this, InviteSearchNewActivity.class);
                 detailsIntent.putExtra(Constants.VISITOR_MODEL, visitorModel);
                 startActivity(detailsIntent);
             }
