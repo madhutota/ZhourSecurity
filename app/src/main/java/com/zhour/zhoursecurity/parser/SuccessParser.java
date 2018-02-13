@@ -18,8 +18,8 @@ public class SuccessParser implements Parser<Model> {
             JSONObject jsonObject = new JSONObject(s);
             if (jsonObject.has("IsError"))
                 mSuccessModel.setError(jsonObject.optBoolean("IsError"));
-            if (jsonObject.has("Message"))
-                mSuccessModel.setMessage(jsonObject.optString("Message"));
+            if (jsonObject.has("Output"))
+                mSuccessModel.setMessage(jsonObject.optString("Output"));
         } catch (Exception e) {
             e.printStackTrace();
         }
