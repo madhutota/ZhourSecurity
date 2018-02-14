@@ -79,6 +79,7 @@
     <string name="phone_icon">&#xf098;</string>
     <string name="camera_icon">&#xf030;</string>
     <string name="barcode_icon">&#xf02a;</string>
+    <string name="close_icon">&#xE5CD;</string>
 
     <string name="flat_number_new">Flat Number</string>
     <string name="resident_ph_no">Resident Ph no</string>

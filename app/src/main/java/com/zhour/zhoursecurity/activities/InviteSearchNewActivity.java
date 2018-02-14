@@ -146,9 +146,14 @@ public class InviteSearchNewActivity extends BaseActivity implements IAsyncCalle
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.list_child);
 
+        final TextView tv_close = dialog.findViewById(R.id.tv_close);
+        tv_close.setTag(dialog);
+        tv_close.setTypeface(Utility.getMaterialIconsRegular(this));
+
         final EditText et_visitor_contact = dialog.findViewById(R.id.et_visitor_contact);
         et_visitor_contact.setTag(dialog);
         et_visitor_contact.setTypeface(Utility.setRobotoRegular(this));
+        et_visitor_contact.setText(visitorModel.getContactnumber());
 
         et_vehicle_num = dialog.findViewById(R.id.et_vehicle_num);
         et_vehicle_num.setTypeface(Utility.setRobotoRegular(this));
@@ -226,6 +231,12 @@ public class InviteSearchNewActivity extends BaseActivity implements IAsyncCalle
             }
         });
 
+        tv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         dialog.show();
     }
