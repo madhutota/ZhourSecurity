@@ -233,7 +233,7 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
                 linkedHashMap.put("guestname", "-" /*et_guest_name.getText().toString()*/);
                 linkedHashMap.put("guestcontact", "0" /*et_guest_no.getText().toString()*/);
                 linkedHashMap.put("residentname", "-");
-                linkedHashMap.put("residentcontact", "9014332627" /*et_resident_number.getText().toString()*/);
+                linkedHashMap.put("residentcontact", "" /*et_resident_number.getText().toString()*/);
 
                 VisitorParser visitorParser = new VisitorParser();
                 ServerIntractorAsync serverJSONAsyncTask = new ServerIntractorAsync(
