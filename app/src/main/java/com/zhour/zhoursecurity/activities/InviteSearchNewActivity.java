@@ -151,9 +151,13 @@ public class InviteSearchNewActivity extends BaseActivity implements IAsyncCalle
         tv_close.setTypeface(Utility.getMaterialIconsRegular(this));
 
         final EditText et_visitor_contact = dialog.findViewById(R.id.et_visitor_contact);
+        final EditText et_visitor_name = dialog.findViewById(R.id.et_visitor_name);
         et_visitor_contact.setTag(dialog);
+        et_visitor_name.setTag(dialog);
         et_visitor_contact.setTypeface(Utility.setRobotoRegular(this));
+        et_visitor_name.setTypeface(Utility.setRobotoRegular(this));
         et_visitor_contact.setText(visitorModel.getContactnumber());
+        et_visitor_name.setText(visitorModel.getVisitorname());
 
         et_vehicle_num = dialog.findViewById(R.id.et_vehicle_num);
         et_vehicle_num.setTypeface(Utility.setRobotoRegular(this));
