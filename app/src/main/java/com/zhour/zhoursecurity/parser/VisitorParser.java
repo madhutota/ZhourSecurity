@@ -44,6 +44,8 @@ public class VisitorParser implements Parser<Model> {
                     mVisitorModel.setResidentcontact1(jsonObject1.optString("residentcontact1"));
                     mVisitorModel.setResidentcontact2(jsonObject1.optString("residentcontact2"));
                     mVisitorModel.setFlat(jsonObject1.optString("flat"));
+                    mVisitorModel.setInviteid(jsonObject1.optString("inviteid"));
+                    mVisitorModel.setInviteeid(jsonObject1.optString("inviteeid"));
 
                     mVisitorModel.setEventdate(jsonObject1.optString("eventdate"));
                     mVisitorModel.setEventtime(jsonObject1.optString("eventtime"));

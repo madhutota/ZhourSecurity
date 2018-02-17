@@ -213,7 +213,8 @@ public class InviteSearchNewActivity extends BaseActivity implements IAsyncCalle
                         linkedHashMap.put("vehiclenumber", "AP29AG7410");
                         linkedHashMap.put("eventtypeid", visitorModel.getInvitetypeid());
                         linkedHashMap.put("residentid", visitorModel.getResidentid());
-                        linkedHashMap.put("inviteid", visitorModel.getInvitetypeid());
+                        linkedHashMap.put("inviteid", visitorModel.getInviteid());
+                        linkedHashMap.put("inviteeid", visitorModel.getInviteeid());
                         linkedHashMap.put("tagid", "12312");
                         linkedHashMap.put("vstm", Utility.getDateMM());
                         linkedHashMap.put("communityid", "12"/*Utility.getSharedPrefStringData(this, Constants.COMMUNITY_ID)*/);

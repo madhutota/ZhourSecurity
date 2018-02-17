@@ -20,6 +20,8 @@ public class VisitorModel extends Model implements Serializable {
     private String flat;
     private String eventdate;
     private String eventtime;
+    private String inviteid;
+    private String inviteeid;
 
     public String getVisitorname() {
         return visitorname;
@@ -123,5 +125,21 @@ public class VisitorModel extends Model implements Serializable {
 
     public void setEventtime(String eventtime) {
         this.eventtime = eventtime;
+    }
+
+    public String getInviteid() {
+        return inviteid;
+    }
+
+    public void setInviteid(String inviteid) {
+        this.inviteid = inviteid;
+    }
+
+    public String getInviteeid() {
+        return inviteeid;
+    }
+
+    public void setInviteeid(String inviteeid) {
+        this.inviteeid = inviteeid;
     }
 }
