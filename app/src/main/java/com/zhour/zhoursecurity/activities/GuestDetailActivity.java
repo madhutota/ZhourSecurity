@@ -150,14 +150,14 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
      */
     @OnClick(R.id.btn_submit)
     void submitCarDetails() {
-        Utility.setSharedPrefStringData(this,Constants.CAR_NUMBER,"");
+        Utility.setSharedPrefStringData(this, Constants.CAR_NUMBER, "");
         Utility.hideSoftKeyboard(GuestDetailActivity.this, btn_submit);
 
         if (isValidDigitFields()) {
             et_pass.setText("");
-           // showPopUp();
+            // showPopUp();
 
-             apiCallToGetDetails();
+            apiCallToGetDetails();
         }
     }
 
@@ -285,6 +285,15 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
                 visitorModel = (VisitorListModel) model;
                 Intent detailsIntent = new Intent(GuestDetailActivity.this, InviteSearchNewActivity.class);
                 detailsIntent.putExtra(Constants.VISITOR_MODEL, visitorModel);
+
+                detailsIntent.putExtra("communityid", "12");
+                detailsIntent.putExtra("passcode", "0");
+                detailsIntent.putExtra("flatnumber", et_flat_no.getText().toString());
+                detailsIntent.putExtra("guestname", "-" /*et_guest_name.getText().toString()*/);
+                detailsIntent.putExtra("guestcontact", "0" /*et_guest_no.getText().toString()*/);
+                detailsIntent.putExtra("residentname", "-");
+                detailsIntent.putExtra("residentcontact", "");
+
                 startActivity(detailsIntent);
             }
         }
@@ -407,7 +416,6 @@ public class GuestDetailActivity extends BaseActivity implements IAsyncCaller {
         return BitmapFactory.decodeStream(ctx.getContentResolver()
                 .openInputStream(uri), null, bmOptions);
     }
-
 
 
 }

@@ -48,6 +48,7 @@ import com.zhour.zhoursecurity.models.VisitorListModel;
 import com.zhour.zhoursecurity.models.VisitorModel;
 import com.zhour.zhoursecurity.parser.LookUpVehicleTypeParser;
 import com.zhour.zhoursecurity.parser.SuccessParser;
+import com.zhour.zhoursecurity.parser.VisitorParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,6 +83,16 @@ public class InviteSearchNewActivity extends BaseActivity implements IAsyncCalle
 
     private EditText et_vehicle_num;
 
+    private String communityid;
+    private String passcode;
+    private String flatnumber;
+    private String guestname;
+    private String guestcontact;
+    private String residentname;
+    private String residentcontact;
+
+    private VisitorListModel visitorModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +106,13 @@ public class InviteSearchNewActivity extends BaseActivity implements IAsyncCalle
         intent = getIntent();
         if (intent.hasExtra(Constants.VISITOR_MODEL)) {
             visitorListModel = (VisitorListModel) intent.getSerializableExtra(Constants.VISITOR_MODEL);
+            communityid = intent.getStringExtra("communityid");
+            passcode = intent.getStringExtra("passcode");
+            flatnumber = intent.getStringExtra("flatnumber");
+            guestname = intent.getStringExtra("guestname");
+            guestcontact = intent.getStringExtra("guestcontact");
+            residentname = intent.getStringExtra("residentname");
+            residentcontact = intent.getStringExtra("residentcontact");
         }
         visitersHeader = visitorListModel.getVisitorModels();
         getResidentDetails(visitorListModel);
@@ -330,6 +348,11 @@ public class InviteSearchNewActivity extends BaseActivity implements IAsyncCalle
         } else if (model instanceof SuccessModel) {
             SuccessModel successModel = (SuccessModel) model;
             Utility.showToastMessage(this, successModel.getMessage());
+            apiCallToGetDetails();
+        } else if (model instanceof VisitorListModel) {
+            visitorModel = (VisitorListModel) model;
+            visitersHeader = visitorModel.getVisitorModels();
+            list_expand__invite_search.setAdapter(new InviteSearchListAdapter(this, visitersHeader));
         }
     }
 
@@ -427,5 +450,31 @@ public class InviteSearchNewActivity extends BaseActivity implements IAsyncCalle
                 }
         }
     }
+
+    private void apiCallToGetDetails() {
+
+        try {
+            LinkedHashMap linkedHashMap = new LinkedHashMap();
+
+            linkedHashMap.put("communityid", communityid);
+            //linkedHashMap.put("passcode", "716536");
+            linkedHashMap.put("passcode", passcode);
+            linkedHashMap.put("flatnumber", flatnumber);
+            linkedHashMap.put("guestname", guestname);
+            linkedHashMap.put("guestcontact", guestcontact);
+            linkedHashMap.put("residentname", residentname);
+            linkedHashMap.put("residentcontact", residentcontact);
+
+            VisitorParser visitorParser = new VisitorParser();
+            ServerIntractorAsync serverJSONAsyncTask = new ServerIntractorAsync(
+                    this, Utility.getResourcesString(this, R.string.please_wait), true,
+                    APIConstants.GET_INVITE_INFO, linkedHashMap,
+                    APIConstants.REQUEST_TYPE.POST, this, visitorParser);
+            Utility.execute(serverJSONAsyncTask);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
